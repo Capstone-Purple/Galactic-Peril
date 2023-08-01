@@ -1,25 +1,26 @@
-const Phaser = require('phaser');
+const Phaser = require("phaser");
 
-console.log('We are accessing the JS.');
+console.log("We are accessing the JS.");
 
 var config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+  type: Phaser.AUTO,
+  width: 1024,
+  height: 576,
+  scene: {
+    preload: preload,
+    create: create,
+    update: update,
+  },
 };
 
 var game = new Phaser.Game(config);
 
 function preload() {
+  this.load.image("background", "/Starship-Map.png");
 }
 
 function create() {
+  this.add.image(400, 300, "background");
 }
 
-function update() {
-}
+function update() {}
