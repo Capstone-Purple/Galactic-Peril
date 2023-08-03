@@ -23,11 +23,13 @@ let config = {
 let game = new Phaser.Game(config);
 
 function preload () {
-    this.load.image('ship', '/images/Ship3_Bottom.png');
-    this.load.image('space', '/images/Background.png')
-    this.load.image('captain', '/images/CaptainMale.png')
-    this.load.image('alien', '/images/Aliens.png')
-    this.load.image('door', '/images/ShipDoor.png');
+  this.load.image('ship', '/images/Ship3_Bottom.png');
+  this.load.image('space', '/images/Background.png')
+  this.load.image('captain', '/images/CaptainMale.png')
+  this.load.image('alien', '/images/Aliens.png')
+  this.load.image('door', '/images/ShipDoor.png');
+  this.load.image("background", "/Starship-Map.png");
+  this.load.image("character", "/CharDown.png");
 }
     
 function create() {
