@@ -38,7 +38,6 @@ function create() {
     this.add.image(400,300, 'ship')//this.image = this.add.image(400,300, 'player')
 
     player = this.physics.add.sprite(400, 300, 'captain');
-    player.currDir = null;
     player2 = this.physics.add.sprite(600,300, 'alien')
     player.setCollideWorldBounds(true)
 
@@ -79,22 +78,18 @@ function create() {
 
 function update() {
     if (cursors.left.isDown) {
-        player.currDir = 'left';
         player.setVelocityX(-160);
         player.anims.play('left', true);
     }
     else if (cursors.right.isDown) {
-        player.currDir = 'right';
         player.setVelocityX(160);
         player.anims.play('right', true);
     }
     else if (cursors.up.isDown) {
-        player.currDir = 'up';
         player.setVelocityY(-160);
         player.anims.play('up', true);
     }
     else if (cursors.down.isDown) {
-        player.currDir = 'down';
         player.setVelocityY(160);
         player.anims.play('down', true);
     }
