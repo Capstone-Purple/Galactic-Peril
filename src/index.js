@@ -1,22 +1,23 @@
 const Phaser = require('phaser');
-// import Example1 from './Example1';
+import Example2 from './Example2';
 console.log('We are accessing the JS.');
 let player;
 let player2;
 let cursors;
+let platform;
 
 
 let config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 1000,
     physics: {
         default: 'arcade'
     },
-    scene: {preload: preload,
+    scene: [{preload: preload,
             create: create,
-            update: update
-    }
+            update: update,
+    }, Example2]
 };
 
 let game = new Phaser.Game(config);
@@ -26,6 +27,7 @@ function preload () {
     this.load.image('space', '/images/Background.png')
     this.load.image('captain', '/images/CaptainMale.png')
     this.load.image('alien', '/images/Aliens.png')
+    this.load.image('door', '/images/ShipDoor.png');
 }
     
 function create() {
@@ -38,7 +40,12 @@ function create() {
     cursors = this.input.keyboard.createCursorKeys();
     this.cameras.main.setSize(1000,1000);
     this.cameras.main.startFollow(player,false,0.1,0.1)
-}
+    platform = this.physics.add.staticGroup();
+    let door = platform.create(160,0,'door').setAlpha(0);
+    this.physics.add.collider(player, door, function() {
+      this.scene.start('Example2')
+    },null,this);
+  }
 
 function update() {
     if (cursors.left.isDown)
