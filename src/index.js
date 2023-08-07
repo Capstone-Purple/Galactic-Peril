@@ -1,6 +1,7 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
 import Example2 from "./Example2";
+import endingScene from "./endingScene";
 
 let player;
 let platform;
@@ -19,6 +20,7 @@ let config = {
       update: update,
     },
     Example2,
+    endingScene,
   ],
 };
 
