@@ -29,7 +29,7 @@ class HealthBar {
   draw() {
     this.bar.clear();
 
-    //black backgriund
+    //black background
     this.bar.fillStyle(0x000000);
     this.bar.fillRect(this.x, this.y, 80, 16);
 
