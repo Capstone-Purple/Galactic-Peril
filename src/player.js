@@ -9,8 +9,8 @@ class HealthBar {
     this.value = 100;
     this.p = 76 / 100;
 
+    //render health bar
     this.draw();
-
     scene.add.existing(this.bar);
   }
 
@@ -29,15 +29,15 @@ class HealthBar {
   draw() {
     this.bar.clear();
 
-    //  BG
+    //black backgriund
     this.bar.fillStyle(0x000000);
     this.bar.fillRect(this.x, this.y, 80, 16);
 
-    //  Health
-
+    //health
     this.bar.fillStyle(0xffffff);
     this.bar.fillRect(this.x + 2, this.y + 2, 76, 12);
 
+    //setting color to red when it gets below 30 health otherwise its green
     if (this.value < 30) {
       this.bar.fillStyle(0xff0000);
     } else {
@@ -106,6 +106,14 @@ class Player {
       sprite.setVelocityX(0);
       sprite.setVelocityY(0);
     }
+
+    //health connected to top of player
+    this.healthBar.x = sprite.x -41;
+    this.healthBar.y = sprite.y -58;
+
+    //damage amount
+    const damageAmount = 0.0;
+    this.healthBar.decrease(damageAmount);
   }
 }
 
