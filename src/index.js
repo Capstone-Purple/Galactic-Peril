@@ -30,6 +30,7 @@ function preload() {
   this.load.image("machinary1-tiles", "tilesets/SciFi_Computers_1.png");
   this.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
   this.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
+  this.load.image("door-tiles", "/tilesets/!$Objects_1.png");
   this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
   // this.load.image('ship', '/images/Ship3_Bottom.png');
   // this.load.image('space', '/images/Background.png');
@@ -55,6 +56,7 @@ function create() {
     "machinary2-tiles"
   );
   const screensTileset = map.addTilesetImage("screens", "screens-tiles");
+  const doorTileset = map.addTilesetImage("door", "door-tiles");
 
   map.createLayer("Ground", floorTileset, 0, 0);
   const wallsLayer = map.createLayer("Walls", wallTileset, 0, 0);
@@ -66,13 +68,17 @@ function create() {
     0
   );
 
+  const doorLayer = map.createLayer("Door", doorTileset, 0, 0);
+
   wallsLayer.setCollisionByProperty({ collides: true });
   machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
+  doorLayer.setCollisionByProperty({ collides: true });
 
   player = new Player(this, 400, 300);
   this.physics.add.collider(player.sprite, [
     wallsLayer,
     machinaryAndScreensLayer,
+    doorLayer,
   ]);
 
   // platform = this.physics.add.staticGroup();
