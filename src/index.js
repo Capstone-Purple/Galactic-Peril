@@ -1,5 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
+const Enemy = require("./enemy.js").default;
 import Example2 from "./Example2";
 import endingScene from "./endingScene";
 
@@ -44,7 +45,7 @@ function preload() {
     frameWidth: 80,
     frameHeight: 80,
   });
-  this.load.spritesheet("alien", "/images/femaleCaptain.png", {
+  this.load.spritesheet("alien", "/images/Alien1.png", {
     frameWidth: 80,
     frameHeight: 80,
   });
@@ -85,8 +86,17 @@ function create() {
   this.physics.add.collider(player.sprite, [
     wallsLayer,
     machinaryAndScreensLayer,
-    doorLayer,
   ]);
+
+  this.physics.add.collider(
+    player.sprite,
+    doorLayer,
+    function () {
+      this.scene.start("endingScene");
+    },
+    null,
+    this
+  );
 
   enemy = new Enemy(this, 800, 300);
   enemy.sprite.setImmovable(true);
@@ -97,13 +107,21 @@ function create() {
 
   this.physics.add.collider(player.sprite, enemy.sprite, function () {
     player.sprite.setTint(0xff0000);
+    const damageAmount = 0.5;
+    player.healthBar.decrease(damageAmount);
   });
 
-  // platform = this.physics.add.staticGroup();
-  // let door = platform.create(160, 0, 'door').setAlpha(0);
-  // this.physics.add.collider(player.sprite, door, function () {
-  //     this.scene.start('Example2')
-  // }, null, this);
+  platform = this.physics.add.staticGroup();
+  let door = platform.create(160, 0, "door").setAlpha(0);
+  this.physics.add.collider(
+    player.sprite,
+    door,
+    function () {
+      this.scene.start("Example2");
+    },
+    null,
+    this
+  );
 }
 
 function update() {

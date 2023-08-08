@@ -39,7 +39,7 @@ class Example2 extends Phaser.Scene {
     platform = this.physics.add.staticGroup();
     panel1 = platform.create(220, 30, "closedpanel");
     let panel3 = platform.create(300, 30, "closedpanel");
-    // let door = platform.create(150,20,'door');
+    let door = platform.create(150, 20, "door");
 
     // let thatThis = this;
     this.physics.add.collider(

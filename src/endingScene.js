@@ -23,12 +23,15 @@ class endingScene extends Phaser.Scene {
   }
 
   create() {
-    const map = this.make.tilemap({ key: "endSceneShip " });
+    const map = this.make.tilemap({ key: "endSceneShip" });
     const floorTileset = map.addTilesetImage("floor", "floor-tiles");
     const doorTileset = map.addTilesetImage("door", "door-tiles");
-    const doorFrameTileset = map.addTilesetImage("door", "door-frame-tiles");
+    const doorFrameTileset = map.addTilesetImage(
+      "door-frame",
+      "door-frame-tiles"
+    );
 
-    const floorLayer = map.createLayer("Ground", floorTileset, 0, 0);
+    const floorLayer = map.createLayer("Floor", floorTileset, 0, 0);
     const doorLayer = map.createLayer("Door", doorTileset, 0, 0);
     const doorFrameLayer = map.createLayer(
       "Door-Frame",
@@ -41,12 +44,18 @@ class endingScene extends Phaser.Scene {
     doorLayer.setCollisionByProperty({ collides: true });
     doorFrameLayer.setCollisionByProperty({ collides: true });
 
-    player = new Player(this, 400, 200);
-    this.physics.add.collider(player.sprite, [
-      floorLayer,
+    player = new Player(this, 560, 100);
+    this.physics.add.collider(player.sprite, [floorLayer, doorFrameLayer]);
+
+    this.physics.add.collider(
+      player.sprite,
       doorLayer,
-      doorFrameLayer,
-    ]);
+      function () {
+        this.scene.start("endingScene");
+      },
+      null,
+      this
+    );
   }
 
   update() {
