@@ -16,7 +16,6 @@ class endingScene extends Phaser.Scene {
       "endSceneShip",
       "tilesets/Starship-Map-Ending-Scene.json"
     );
-
     this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
       frameWidth: 80,
       frameHeight: 80,
@@ -42,7 +41,7 @@ class endingScene extends Phaser.Scene {
     doorLayer.setCollisionByProperty({ collides: true });
     doorFrameLayer.setCollisionByProperty({ collides: true });
 
-    player = new Player(this, 400, 300);
+    player = new Player(this, 400, 200);
     this.physics.add.collider(player.sprite, [
       floorLayer,
       doorLayer,
