@@ -1,6 +1,7 @@
 const Phaser = require('phaser');
-const Player = require('./player.js').default;
-const Enemy = require('./enemy.js').default;
+// const Player = require('./player.js').default;
+// const Enemy = require('./enemy.js').default;
+const Scene1 = require('./scenes/scene1.js').default;
 import Example2 from './Example2';
 
 let player;
@@ -14,18 +15,12 @@ let config = {
   physics: {
     default: "arcade",
   },
-  scene: [
-    {
-      preload: preload,
-      create: create,
-      update: update,
-    },
-    Example2,
-  ],
+  scene: Example2
 };
 
 let game = new Phaser.Game(config);
 
+/*
 function preload() {
   this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
   this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
@@ -96,3 +91,4 @@ function update() {
   enemy.update(player);
 }
 
+*/

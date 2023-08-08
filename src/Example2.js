@@ -15,7 +15,6 @@ class Example2 extends Phaser.Scene {
     preload() {
         this.load.image('ship2', '/images/Starship-Map.png');
         this.load.image('space', '/images/Background.png')
-        this.load.image('captain', '/images/CaptainMale.png')
         this.load.image('alien', '/images/Aliens.png')
         this.load.image('closedpanel', '/images/ClosedPanel.png')
         this.load.image('openpanel', '/images/OpenPanel.png')
@@ -27,7 +26,6 @@ class Example2 extends Phaser.Scene {
         // this.add.image(800,600,'space')
         this.add.image(400, 500, 'ship2')//this.image = this.add.image(400,300, 'player')
 
-        // player = this.physics.add.sprite(300, 500, 'captain');
         player = new Player(this, 300, 500);
         player2 = this.physics.add.sprite(600, 500, 'alien')
         player.sprite.setCollideWorldBounds(true)
