@@ -6,6 +6,10 @@ let player;
 let enemy;
 
 class Scene1 extends Phaser.Scene {
+    constructor() {
+        super({ key: 'Scene1' });
+    }
+
     preload() {
         this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
         this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
@@ -64,9 +68,8 @@ class Scene1 extends Phaser.Scene {
             player.sprite.setTint(0xff0000)
         })
 
-        // platform = this.physics.add.staticGroup();
-        // let door = platform.create(160, 0, 'door').setAlpha(0);
-        // this.physics.add.collider(player.sprite, door, function () {
+        // Uncomment to cause a collisions between player and walls to start a new scene.
+        // this.physics.add.collider(player.sprite, wallsLayer, function () {
         //     this.scene.start('Example2')
         // }, null, this);        
     }

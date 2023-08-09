@@ -4,6 +4,16 @@ const Phaser = require('phaser');
 const Scene1 = require('./scenes/scene1.js').default;
 import Example2 from './Example2';
 
+const sceneArr = [Scene1, Example2];
+
+const path = window.location.pathname;
+if (path.length > 1) {
+  const targetIndex = Number(path.substr(1));
+  sceneArr.unshift(sceneArr.splice(targetIndex, 1)[0]);
+}
+
+console.log(sceneArr);
+
 let player;
 let enemy;
 let platform;
@@ -15,12 +25,12 @@ let config = {
   physics: {
     default: "arcade",
   },
-  scene: Example2
+  scene: sceneArr
 };
 
 let game = new Phaser.Game(config);
 
-/*
+
 function preload() {
   this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
   this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
@@ -37,7 +47,7 @@ function preload() {
     frameWidth: 80,
     frameHeight: 80,
   });
-  this.load.spritesheet('alien', '/images/femaleCaptain.png', { frameWidth: 80, frameHeight: 80});
+  this.load.spritesheet('alien', '/images/femaleCaptain.png', { frameWidth: 80, frameHeight: 80 });
 }
 
 function create() {
@@ -63,7 +73,7 @@ function create() {
     0,
     0
   );
-  
+
   wallsLayer.setCollisionByProperty({ collides: true });
   machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
 
@@ -78,7 +88,7 @@ function create() {
   this.physics.add.collider(player.sprite, enemy.sprite, function () {
     player.sprite.setTint(0xff0000)
   })
-  
+
   // platform = this.physics.add.staticGroup();
   // let door = platform.create(160, 0, 'door').setAlpha(0);
   // this.physics.add.collider(player.sprite, door, function () {
@@ -90,5 +100,3 @@ function update() {
   player.update();
   enemy.update(player);
 }
-
-*/
