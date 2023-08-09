@@ -1,22 +1,27 @@
 const Phaser = require("phaser");
 
-class Inventory {
-  constructor(x, y, w, h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.color = "rgba(255, 255, 255, 0.5)";
-    this.items = new Array();
-    this.columns = 4;
+class Inventory extends Phaser.Scene {
+
+  preload() {
+    //this.load.image('inventoryPanel', 'path to panel');
+    this.load.image('emptyIcon', 'Purple-capstone/static/images/inventoryIcon.png');
   }
 
-  addItem(sprite) {
-    if (this.items.length == this.columns) {
-      
-    }
+  create() {
+    const inv1 = this.add.image(100, 200, 'emptyIcon');
+    const inv2 = this.add.image(200, 200, 'emptyIcon');
+    const inv3 = this.add.image(300, 200, 'emptyIcon');
+
+    const inventory = this.add.inventory(300, 300, [ inv1, inv2, inv3 ]);
   }
 }
+
+const config = {
+  type: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  scene: Inventory
+};
 
 class HealthBar {
   constructor(scene, x, y) {

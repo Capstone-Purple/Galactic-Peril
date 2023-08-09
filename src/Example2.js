@@ -54,7 +54,6 @@ class Example2 extends Phaser.Scene {
                 panel2 = platform.create(250, 30, 'openpanel');
             }, this)
         }, null, this);
-
     }
 
     update() {
