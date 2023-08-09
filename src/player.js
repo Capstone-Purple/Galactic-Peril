@@ -1,27 +1,31 @@
 const Phaser = require("phaser");
 
-class Inventory extends Phaser.Scene {
+class Inventory {
+  constructor(scene, x, y, inv1, inv2, inv3) {
+    this.invBar = new Phaser.GameObjects.Graphics(scene);
+
+    this.x = x;
+    this.y = y;
+    this.inv1 = inv1;
+    this.inv2 = inv2;
+    this.inv3 = inv3;
+
+    this.draw();
+    scene.add.existing(this.invBar)
+  }
 
   preload() {
     //this.load.image('inventoryPanel', 'path to panel');
     this.load.image('emptyIcon', 'Purple-capstone/static/images/inventoryIcon.png');
   }
 
-  create() {
-    const inv1 = this.add.image(100, 200, 'emptyIcon');
-    const inv2 = this.add.image(200, 200, 'emptyIcon');
-    const inv3 = this.add.image(300, 200, 'emptyIcon');
+  draw() {
+    this.invBar
 
-    const inventory = this.add.inventory(300, 300, [ inv1, inv2, inv3 ]);
+    this.bar.fillStyle(0x000000);
+    this.bar.fillRect(this.x, this.y, 80, 16);
   }
 }
-
-const config = {
-  type: Phaser.AUTO,
-  width: 800,
-  height: 600,
-  scene: Inventory
-};
 
 class HealthBar {
   constructor(scene, x, y) {
