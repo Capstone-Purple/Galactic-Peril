@@ -5,6 +5,7 @@ const Enemy = require('./enemy.js').default;
 let player;
 let enemy;
 let platform;
+let item1;
 
 class Scene1 extends Phaser.Scene {
     constructor() {
@@ -19,6 +20,7 @@ class Scene1 extends Phaser.Scene {
   this.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
   this.load.image("door-tiles", "/tilesets/!$Objects_1.png");
   this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
+  this.load.image("item1", "/images/alienPistol.png")
   // this.load.image('ship', '/images/Ship3_Bottom.png');
   // this.load.image('space', '/images/Background.png');
   // this.load.image('alien', '/images/Aliens.png');
@@ -111,6 +113,10 @@ class Scene1 extends Phaser.Scene {
             this
         );
 
+        //alienPistol
+        item1 = this.physics.add.sprite(200, 200, "item1");
+        this.physics.add.overlap(player.sprite, item1, this.collectItem, null, this);
+
         const mainMenu = this.add.text(600,600, "Main Menu", { fontFamily: "Comic Sans MS", font: "30px Impact", })
         mainMenu.setInteractive().on('pointerdown', () => { 
             this.scene.start('MainMenu') 
@@ -127,10 +133,15 @@ class Scene1 extends Phaser.Scene {
         });
     }
     
+    //removes item1 from this scene
+    collectItem(player, item1) {
+        item1.destroy(); 
+        //player.inventory.push(item1.texture.key);
+}
     update() {
         player.update();
         enemy.update(player);
-    }
+   }
 }
 
 module.exports = Scene1;
