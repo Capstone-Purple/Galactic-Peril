@@ -1,11 +1,24 @@
 const Phaser = require('phaser');
-const Player = require('./player.js').default;
-const Enemy = require('./enemy.js').default;
-import Example2 from './Example2';
+// const Player = require('./player.js').default;
+// const Enemy = require('./enemy.js').default;
+
+const sceneArr = [ MainMenu, Scene1, Example2, endingScene ];
+
+const path = window.location.pathname;
+if (path.length > 1) {
+  const targetIndex = Number(path.substr(1));
+  sceneArr.unshift(sceneArr.splice(targetIndex, 1)[0]);
+}
+
+console.log(sceneArr);
 
 let player;
 let enemy;
 let platform;
+import MainMenu from './MainMenu';
+import Scene1 from './Scene1';
+import Example2 from './Example2';
+import endingScene from "./endingScene";
 
 let config = {
   type: Phaser.AUTO,
@@ -14,17 +27,11 @@ let config = {
   physics: {
     default: "arcade",
   },
-  scene: [
-    {
-      preload: preload,
-      create: create,
-      update: update,
-    },
-    Example2,
-  ],
+  scene: sceneArr
 };
 
 let game = new Phaser.Game(config);
+
 
 function preload() {
   this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
@@ -42,7 +49,7 @@ function preload() {
     frameWidth: 80,
     frameHeight: 80,
   });
-  this.load.spritesheet('alien', '/images/femaleCaptain.png', { frameWidth: 80, frameHeight: 80});
+  this.load.spritesheet('alien', '/images/femaleCaptain.png', { frameWidth: 80, frameHeight: 80 });
 }
 
 function create() {
@@ -68,7 +75,7 @@ function create() {
     0,
     0
   );
-  
+
   wallsLayer.setCollisionByProperty({ collides: true });
   machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
 
@@ -83,7 +90,7 @@ function create() {
   this.physics.add.collider(player.sprite, enemy.sprite, function () {
     player.sprite.setTint(0xff0000)
   })
-  
+
   // platform = this.physics.add.staticGroup();
   // let door = platform.create(160, 0, 'door').setAlpha(0);
   // this.physics.add.collider(player.sprite, door, function () {
@@ -95,4 +102,3 @@ function update() {
   player.update();
   enemy.update(player);
 }
-

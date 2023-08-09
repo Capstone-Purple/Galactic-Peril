@@ -101,7 +101,7 @@ class Player {
       key: "up",
       frames: anims.generateFrameNumbers("captain", { start: 9, end: 11 }),
       frameRate: 10,
-      repeeat: -1,
+      repeat: -1,
     });
     anims.create({
       key: "down",
@@ -135,10 +135,10 @@ class Player {
     }
 
     //health connected to top of player
-    this.healthBar.x = sprite.x -41;
-    this.healthBar.y = sprite.y -58;
+    this.healthBar.x = sprite.x - 41;
+    this.healthBar.y = sprite.y - 58;
 
-    //damage amount
+    // //damage amount
     const damageAmount = 0.0;
     this.healthBar.decrease(damageAmount);
   }
