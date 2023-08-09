@@ -1,29 +1,39 @@
 const Phaser = require("phaser");
 
-class Inventory {
-  constructor(scene, x, y, inv1, inv2, inv3) {
-    this.invBar = new Phaser.GameObjects.Graphics(scene);
+class InventorySlot {
+  constructor(scene, x, y, width, height) {
+  this.scene = scene;
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
 
+      //ui for inventory slots
+      this.slotImage = scene.add.sprite(x, y, "/images/inventoryIcon.png");
+      this.slotImage.setOrigin(0, 0);
+      this.slotImage.setDisplaySize(50, 50);
+  }
+}
+
+class InventoryGrid {
+  constructor(scene, x, y, rows, cols, slotSize) {
+    this.scene = scene;
     this.x = x;
     this.y = y;
-    this.inv1 = inv1;
-    this.inv2 = inv2;
-    this.inv3 = inv3;
+    this.rows = rows;
+    this.cols = cols;
+    this.slotSize = slotSize;
+    this.slots = [];
 
-    this.draw();
-    scene.add.existing(this.invBar)
-  }
-
-  preload() {
-    //this.load.image('inventoryPanel', 'path to panel');
-    this.load.image('emptyIcon', 'Purple-capstone/static/images/inventoryIcon.png');
-  }
-
-  draw() {
-    this.invBar
-
-    this.bar.fillStyle(0x000000);
-    this.bar.fillRect(this.x, this.y, 80, 16);
+    // Create a grid of inventory slots
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const slotX = x + col * slotSize;
+        const slotY = y + row * slotSize;
+        const slot = new InventorySlot(scene, slotX, slotY, slotSize, slotSize);
+        this.slots.push(slot);
+      }
+    }
   }
 }
 
@@ -83,7 +93,9 @@ class Player {
     this.scene = scene;
 
     this.healthBar = new HealthBar(scene, posX - 41, posY - 58);
-
+    
+    this.inventory = new InventoryGrid(scene, 320, 730, 1, 3, 70)
+    
     const anims = scene.anims;
     anims.create({
       key: "left",
@@ -144,4 +156,4 @@ class Player {
   }
 }
 
-export default Player;
+export default Player
