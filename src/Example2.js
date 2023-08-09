@@ -15,7 +15,6 @@ class Example2 extends Phaser.Scene {
   preload() {
     this.load.image("ship2", "/images/Starship-Map.png");
     this.load.image("space", "/images/Background.png");
-    this.load.image("captain", "/images/CaptainMale.png");
     this.load.image("alien", "/images/Aliens.png");
     this.load.image("closedpanel", "/images/ClosedPanel.png");
     this.load.image("openpanel", "/images/OpenPanel.png");

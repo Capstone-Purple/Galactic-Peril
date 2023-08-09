@@ -4,6 +4,7 @@ const Enemy = require('./enemy.js').default;
 
 let player;
 let enemy;
+let platform;
 
 class Scene1 extends Phaser.Scene {
     constructor() {
