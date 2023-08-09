@@ -1,10 +1,8 @@
 const Phaser = require('phaser');
 // const Player = require('./player.js').default;
 // const Enemy = require('./enemy.js').default;
-const Scene1 = require('./scenes/scene1.js').default;
-import Example2 from './Example2';
 
-const sceneArr = [Scene1, Example2];
+const sceneArr = [ MainMenu, Scene1, Example2, endingScene ];
 
 const path = window.location.pathname;
 if (path.length > 1) {
@@ -17,6 +15,10 @@ console.log(sceneArr);
 let player;
 let enemy;
 let platform;
+import MainMenu from './MainMenu';
+import Scene1 from './Scene1';
+import Example2 from './Example2';
+import endingScene from "./endingScene";
 
 let config = {
   type: Phaser.AUTO,
