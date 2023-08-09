@@ -2,6 +2,7 @@ const Phaser = require("phaser");
 const Player = require("./player.js").default;
 
 let player;
+let platform;
 
 class endingScene extends Phaser.Scene {
   constructor() {
@@ -9,9 +10,11 @@ class endingScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image("background-tiles", "tilesets/Starfield_1.png");
     this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
     this.load.image("door-tiles", "tilesets/!$Objects_1.png");
     this.load.image("door-frame-tiles", "tilesets/SciFi_Deco_4.png");
+    this.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");
     this.load.tilemapTiledJSON(
       "endSceneShip",
       "tilesets/Starship-Map-Ending-Scene.json"
@@ -24,13 +27,19 @@ class endingScene extends Phaser.Scene {
 
   create() {
     const map = this.make.tilemap({ key: "endSceneShip" });
+    const backgroundTileset = map.addTilesetImage(
+      "background",
+      "background-tiles"
+    );
     const floorTileset = map.addTilesetImage("floor", "floor-tiles");
     const doorTileset = map.addTilesetImage("door", "door-tiles");
     const doorFrameTileset = map.addTilesetImage(
       "door-frame",
       "door-frame-tiles"
     );
+    const shipTileset = map.addTilesetImage("ship", "ship-tiles");
 
+    map.createLayer("Background", backgroundTileset, 0, 0);
     const floorLayer = map.createLayer("Floor", floorTileset, 0, 0);
     const doorLayer = map.createLayer("Door", doorTileset, 0, 0);
     const doorFrameLayer = map.createLayer(
@@ -43,15 +52,22 @@ class endingScene extends Phaser.Scene {
     floorLayer.setCollisionByProperty({ collides: true });
     doorLayer.setCollisionByProperty({ collides: true });
     doorFrameLayer.setCollisionByProperty({ collides: true });
+    map.createLayer("Ship", shipTileset, 0, 0);
 
-    player = new Player(this, 560, 100);
-    this.physics.add.collider(player.sprite, [floorLayer, doorFrameLayer]);
+    player = new Player(this, 560, 150);
+    this.physics.add.collider(player.sprite, [
+      floorLayer,
+      doorFrameLayer,
+      //   doorLayer,
+    ]);
 
+    platform = this.physics.add.staticGroup();
+    // let door = platform.create(560, 80, "door").setAlpha(0);
     this.physics.add.collider(
       player.sprite,
       doorLayer,
       function () {
-        this.scene.start("endingScene");
+        this.scene.start("Scene1");
       },
       null,
       this
