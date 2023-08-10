@@ -1,23 +1,24 @@
 {
-  "name": "purple-capstone",
+  "name": "galactic-peril",
   "description": "---------------------- Space-Invasion themed single player top-down 2D style game.",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm run build & npm run start"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Capstone-Purple/Purple-capstone.git"
+    "url": "git+https://github.com/Capstone-Purple/Galactic-Peril.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Capstone-Purple/Purple-capstone/issues"
+    "url": "https://github.com/Capstone-Purple/Galactic-Peril/issues"
   },
-  "homepage": "https://github.com/Capstone-Purple/Purple-capstone#readme",
+  "homepage": "https://github.com/Capstone-Purple/Galactic-Peril#readme",
   "dependencies": {
     "@babel/core": "^7.22.9",
     "babel-loader": "^9.1.3",
