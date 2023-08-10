@@ -19,6 +19,7 @@ class Scene1 extends Phaser.Scene {
     this.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
     this.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
     this.load.image("door-tiles", "/tilesets/!$Objects_1.png");
+
     this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
     this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
       frameWidth: 80,
@@ -67,16 +68,19 @@ class Scene1 extends Phaser.Scene {
     doorLayer.setCollisionByProperty({ collides: true });
 
     player = new Player(this, 400, 300);
-        this.physics.add.collider(player.sprite, [wallsLayer, machinaryAndScreensLayer]);
-        // player.sprite.setImmovable(true)
-        let loadedPlayer = localStorage.getItem('player');
-        if (loadedPlayer) {
-            let location = JSON.parse(loadedPlayer);
-            player.sprite.setPosition(location.x, location.y)
-            let loadHealth= localStorage.getItem('healthBar');
-            let hBar = JSON.parse(loadHealth)
-            player.healthBar.value = hBar;
-        }
+    this.physics.add.collider(player.sprite, [
+      wallsLayer,
+      machinaryAndScreensLayer,
+    ]);
+    // player.sprite.setImmovable(true)
+    let loadedPlayer = localStorage.getItem("player");
+    if (loadedPlayer) {
+      let location = JSON.parse(loadedPlayer);
+      player.sprite.setPosition(location.x, location.y);
+      let loadHealth = localStorage.getItem("healthBar");
+      let hBar = JSON.parse(loadHealth);
+      player.healthBar.value = hBar;
+    }
 
     this.physics.add.collider(
       player.sprite,
@@ -89,42 +93,58 @@ class Scene1 extends Phaser.Scene {
     );
 
     enemy = new Enemy(this, 800, 300);
-    enemy.sprite.setImmovable(true)
-    this.physics.add.collider(enemy.sprite, [wallsLayer, machinaryAndScreensLayer]);
-    let loadedEnemy = localStorage.getItem('enemy');
+    enemy.sprite.setImmovable(true);
+    this.physics.add.collider(enemy.sprite, [
+      wallsLayer,
+      machinaryAndScreensLayer,
+    ]);
+    let loadedEnemy = localStorage.getItem("enemy");
     if (loadedEnemy) {
       let location = JSON.parse(loadedEnemy);
-        enemy.sprite.setPosition(location.x, location.y)
-      }
+      enemy.sprite.setPosition(location.x, location.y);
+    }
 
-    this.physics.add.collider(player.sprite, enemy.sprite, function () {
-      // player.sprite.setTint(0xff0000);
-      const damageAmount = 0.5;
-      player.healthBar.decrease(damageAmount);
-      if (player.healthBar.value === 0){
-        let gameOver = this.add.text(500,300, "Game Over", { fontFamily: "Comic Sans MS", font: "20px Impact", color: "black"})//, stroke: '#ffff00', strokeThickness: 2})
-        this.tweens.addCounter({
-          from: 0,
-          to: 1,
-          duration: 3000,
-          //yoyo: true,
-          onUpdate: (tween) => {
-            const v = tween.getValue();
-            const c = 255 * v;
-            gameOver.setFontSize(40 + v * 64);
-            gameOver.setColor(`rgb(${c}, 0,0)`)//${c}, ${c})`);
-          }
-        });
-        player.sprite.body.setEnable(false)//try 
-        player.sprite.disableBody(true,true)
-        // player.sprite.setTexture('deadPlayer').setScale(.50)
-        saveAndQuit.destroy()
-        const restartBtn = this.add.text(300,600, "Restart", { fontFamily: "Comic Sans MS", font: "30px Impact"})
-        restartBtn.setInteractive({cursor: 'pointer'}).on('pointerdown', () => 
-          this.scene.start('Scene1')
-        )
-      }
-    }, null, this);
+    this.physics.add.collider(
+      player.sprite,
+      enemy.sprite,
+      function () {
+        // player.sprite.setTint(0xff0000);
+        const damageAmount = 0.5;
+        player.healthBar.decrease(damageAmount);
+        if (player.healthBar.value === 0) {
+          let gameOver = this.add.text(500, 300, "Game Over", {
+            fontFamily: "Comic Sans MS",
+            font: "20px Impact",
+            color: "black",
+          }); //, stroke: '#ffff00', strokeThickness: 2})
+          this.tweens.addCounter({
+            from: 0,
+            to: 1,
+            duration: 3000,
+            //yoyo: true,
+            onUpdate: (tween) => {
+              const v = tween.getValue();
+              const c = 255 * v;
+              gameOver.setFontSize(40 + v * 64);
+              gameOver.setColor(`rgb(${c}, 0,0)`); //${c}, ${c})`);
+            },
+          });
+          player.sprite.body.setEnable(false); //try
+          player.sprite.disableBody(true, true);
+          // player.sprite.setTexture('deadPlayer').setScale(.50)
+          saveAndQuit.destroy();
+          const restartBtn = this.add.text(300, 600, "Restart", {
+            fontFamily: "Comic Sans MS",
+            font: "30px Impact",
+          });
+          restartBtn
+            .setInteractive({ cursor: "pointer" })
+            .on("pointerdown", () => this.scene.start("Scene1"));
+        }
+      },
+      null,
+      this
+    );
 
     platform = this.physics.add.staticGroup();
     let door = platform.create(160, 0, "door").setAlpha(0);
@@ -137,35 +157,52 @@ class Scene1 extends Phaser.Scene {
       null,
       this
     );
-    
-    this.physics.add.collider(player.sprite, doorLayer, function () {
-        this.scene.start("endingScene"); }, null, this
+
+    this.physics.add.collider(
+      player.sprite,
+      doorLayer,
+      function () {
+        this.scene.start("endingScene");
+      },
+      null,
+      this
     );
 
-    const mainMenu = this.add.text(600,600, "Main Menu", { fontFamily: "Comic Sans MS", font: "30px Impact", })
-    mainMenu.setInteractive({cursor: 'pointer'}).on('pointerdown', () => { 
-        this.scene.start('MainMenu') 
+    const mainMenu = this.add.text(600, 600, "Main Menu", {
+      fontFamily: "Comic Sans MS",
+      font: "30px Impact",
     });
-    
-    const saveAndQuit = this.add.text(300,600, "Save & Quit", { fontFamily: "Comic Sans MS", font: "30px Impact", })
-    saveAndQuit.setInteractive({cursor: 'pointer'}).on('pointerdown', () => { 
-        localStorage.setItem('scene', this.scene.key)
-        localStorage.setItem('player', JSON.stringify({ x: player.sprite.x, y: player.sprite.y}))
-        localStorage.setItem('enemy', JSON.stringify({x: enemy.sprite.x, y: enemy.sprite.y}))
-        localStorage.setItem('healthBar', JSON.stringify(player.healthBar.value))//{x: player.healthBar.x, y: player.healthBar.y}))
+    mainMenu.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
+      this.scene.start("MainMenu");
+    });
 
-        //SAVE PLAYER INVENTORY
-        //WILL ITEMS COLLECTED REMAIN COLLECTED??
-        // console.log(player)
-        this.scene.start('MainMenu') 
+    const saveAndQuit = this.add.text(300, 600, "Save & Quit", {
+      fontFamily: "Comic Sans MS",
+      font: "30px Impact",
     });
-    }
-    
-    update() {
-        player.update();
-        enemy.update(player);
-    }
+    saveAndQuit.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
+      localStorage.setItem("scene", this.scene.key);
+      localStorage.setItem(
+        "player",
+        JSON.stringify({ x: player.sprite.x, y: player.sprite.y })
+      );
+      localStorage.setItem(
+        "enemy",
+        JSON.stringify({ x: enemy.sprite.x, y: enemy.sprite.y })
+      );
+      localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
+
+      //SAVE PLAYER INVENTORY
+      //WILL ITEMS COLLECTED REMAIN COLLECTED??
+      // console.log(player)
+      this.scene.start("MainMenu");
+    });
+  }
+
+  update() {
+    player.update();
+    enemy.update(player);
+  }
 }
-
 
 module.exports = Scene1;
