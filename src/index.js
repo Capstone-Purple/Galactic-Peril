@@ -2,15 +2,13 @@ const Phaser = require('phaser');
 // const Player = require('./player.js').default;
 // const Enemy = require('./enemy.js').default;
 
-const sceneArr = [ MainMenu, Scene1, Example2, endingScene ];
+const sceneArr = [ MainMenu, Scene1, Example2, endingScene, Arena ];
 
 const path = window.location.pathname;
 if (path.length > 1) {
-  const targetIndex = Number(path.substr(1));
+  const targetIndex = Number(path.substring(1));
   sceneArr.unshift(sceneArr.splice(targetIndex, 1)[0]);
 }
-
-console.log(sceneArr);
 
 let player;
 let enemy;
@@ -19,6 +17,7 @@ import MainMenu from './MainMenu';
 import Scene1 from './Scene1';
 import Example2 from './Example2';
 import endingScene from "./endingScene";
+import Arena from './scenes/Arena.js';
 
 let config = {
   type: Phaser.AUTO,
