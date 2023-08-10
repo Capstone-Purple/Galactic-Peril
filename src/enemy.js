@@ -35,11 +35,14 @@ class Enemy {
   }
 
   update(playerInfo) {
-    this.trackPlayer(playerInfo, this.sprite);
+    const vector = this.trackPlayer(playerInfo, this.sprite);
+    this.pickAnimation(vector);
   }
 
   trackPlayer(player, enemy) {
     const speed = 0.5;
+    let velocityX = 0;
+    let velocityY = 0;
     const angle = Phaser.Math.Angle.Between(
       enemy.x,
       enemy.y,
@@ -53,29 +56,37 @@ class Enemy {
       (Math.abs(distanceX) < 200 && Math.abs(distanceX) > 80) ||
       (Math.abs(distanceY) < 200 && Math.abs(distanceY) > 80)
     ) {
-      let velocityX = (player.sprite.x - enemy.x) * speed;
-      let velocityY = (player.sprite.y - enemy.y) * speed;
+      velocityX = (player.sprite.x - enemy.x) * speed;
+      velocityY = (player.sprite.y - enemy.y) * speed;
 
-      enemy.setVelocityX(velocityX); // - 100); // adding this in will kind of give you a chance to escape
+      enemy.setVelocityX(velocityX); 
       enemy.setVelocityY(velocityY);
-
+    }
+    return [velocityX, velocityY];
+  }
+  
+  pickAnimation(vector) {
+    const { sprite } = this;
+    const [velocityX, velocityY] = vector;
+    if (velocityX === 0 & velocityY === 0) {
+      // Enemey is not in motion.
+      sprite.anims.stop();
+    } else if (Math.abs(velocityX) > Math.abs(velocityY)) {
+      // Enemy will move horizontally.
       if (velocityX > 0) {
-        enemy.anims.play("chaseRight", true);
-      }
-      if (velocityX < 0) {
-        enemy.anims.play("chaseLeft", true);
-      }
-      if (velocityY < 0) {
-        enemy.anims.play("chaseUp", true);
-      }
-      if (velocityY > 0) {
-        enemy.anims.play("chaseDown", true);
+        sprite.anims.play("chaseRight", true);
+      } else {
+        sprite.anims.play("chaseLeft", true);
       }
     } else {
-      enemy.anims.stop();
-      enemy.setVelocityX(0);
-      enemy.setVelocityY(0);
+      // Enemy will move vertically.
+      if (velocityY > 0) {
+        sprite.anims.play("chaseDown", true);
+      } else {
+        sprite.anims.play("chaseUp", true);
+      }
     }
+
   }
 }
 
