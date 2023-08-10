@@ -1,5 +1,47 @@
 const Phaser = require("phaser");
 
+class Knives {
+  constructor(scene) {
+    this.scene = scene;
+    this.knivesGroup = this.scene.add.group(); // Initialize the knives group
+  }
+
+  throwKnife() {
+    if (!this.scene.knives) {
+      return;
+    }
+    const parts = this.scene.anims.currentAnim.key.split("-");
+    const direction = parts[2];
+
+    const vec = new Phaser.Math.Vector2(0, 0);
+
+    switch (direction) {
+      case "up":
+        vec.y = -1;
+        break;
+      case "down":
+        vec.y = 1;
+        break;
+      default:
+      case "side":
+        if (this.scene.scaleX < 0) {
+          vec.x = -1;
+        } else {
+          vec.x = 1;
+        }
+        break;
+    }
+    const angle = vec.angle();
+    const knife = this.knivesGroup.get(this.scene.x, this.scene.y, "knife");
+    knife.setRotation(angle);
+    knife.setVelocity(vec.x * 300, vec.y * 300);
+  }
+
+  setKnives(knives) {
+    this.scene.knives = knives;
+  }
+}
+
 class HealthBar {
   constructor(scene, x, y) {
     this.bar = new Phaser.GameObjects.Graphics(scene);
@@ -56,6 +98,8 @@ class Player {
     this.scene = scene;
 
     this.healthBar = new HealthBar(scene, posX - 41, posY - 58);
+
+    this.knives = new Knives(scene, x, y);
 
     const anims = scene.anims;
     anims.create({
