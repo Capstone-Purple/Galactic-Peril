@@ -38,6 +38,17 @@ class InventoryGrid {
       }
     }
   }
+
+      //updates the inventory slot with a new item
+      addItem(itemTextureKey) {
+        //find the first empty slot and update its image
+        for (const slot of this.slots) {
+            if (!slot.slotImage.texture.key) {
+                slot.slotImage.setTexture(itemTextureKey);
+                break; //exit the loop after setting the image
+            }
+        }
+    }
 }
 
 class HealthBar {

@@ -132,11 +132,11 @@ class Scene1 extends Phaser.Scene {
             this.scene.start('MainMenu') 
         });
     }
-    
+
     //removes item1 from this scene
     collectItem(player, item1) {
-        item1.destroy(); 
-        //player.inventory.push(item1.texture.key);
+        item1.destroy();
+        player.inventory.addItem(item1.texture.key);
 }
     update() {
         player.update();
