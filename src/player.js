@@ -122,7 +122,7 @@ class Player {
     this.healthBar.x = sprite.x - 41;
     this.healthBar.y = sprite.y - 58;
 
-    // //damage amount
+    //damage amount
     const damageAmount = 0.0;
     this.healthBar.decrease(damageAmount);
   }

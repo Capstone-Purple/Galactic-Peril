@@ -27,8 +27,8 @@ class Scene1 extends Phaser.Scene {
       frameHeight: 80,
     });
     this.load.spritesheet("alien", "/images/Alien1.png", {
-      frameWidth: 85,
-      frameHeight: 96,
+      frameWidth: 100,
+      frameHeight: 100,
     });
   }
 
