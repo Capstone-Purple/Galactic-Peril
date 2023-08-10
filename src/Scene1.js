@@ -19,6 +19,7 @@ class Scene1 extends Phaser.Scene {
     this.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
     this.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
     this.load.image("door-tiles", "/tilesets/!$Objects_1.png");
+    this.load.image("laser", "/weapons/Laser.png");
 
     this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
     this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
@@ -146,6 +147,15 @@ class Scene1 extends Phaser.Scene {
       this
     );
 
+    // this enables collisions between lasers and enemies
+    this.physics.add.collider(
+      player.laser,
+      enemy.sprite,
+      this.handleLaserEnemyCollision,
+      null,
+      this
+    );
+
     platform = this.physics.add.staticGroup();
     let door = platform.create(160, 0, "door").setAlpha(0);
     this.physics.add.collider(
@@ -197,6 +207,11 @@ class Scene1 extends Phaser.Scene {
       // console.log(player)
       this.scene.start("MainMenu");
     });
+  }
+
+  handleLaserEnemyCollision(laser, enemy) {
+    laser.setActive(false);
+    laser.setVisible(false);
   }
 
   update() {
