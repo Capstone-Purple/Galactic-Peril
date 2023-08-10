@@ -58,6 +58,7 @@ class Player {
     this.healthBar = new HealthBar(scene, posX - 41, posY - 58);
 
     const anims = scene.anims;
+
     anims.create({
       key: "left",
       frames: anims.generateFrameNumbers("captain", { start: 3, end: 5 }),
@@ -85,6 +86,11 @@ class Player {
 
     this.sprite = scene.physics.add.sprite(posX, posY, "captain");
     this.cursors = scene.input.keyboard.createCursorKeys();
+
+    // creating laser sprite
+    this.laser = scene.physics.add.sprite(posX, posY, "laser");
+    this.laser.setVisible(false);
+    this.laser.setActive(false);
   }
 
   update() {
@@ -107,6 +113,11 @@ class Player {
       sprite.setVelocityY(0);
     }
 
+    // check for space bar input to shoot
+    if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
+      this.shootLaser();
+    }
+
     //health connected to top of player
     this.healthBar.x = sprite.x - 41;
     this.healthBar.y = sprite.y - 58;
@@ -114,6 +125,34 @@ class Player {
     // //damage amount
     const damageAmount = 0.0;
     this.healthBar.decrease(damageAmount);
+  }
+
+  shootLaser() {
+    // speed
+    const laserSpeed = 300;
+
+    // slightly in front
+    this.laser.setPosition(this.sprite.x, this.sprite.y - 20);
+    this.laser.setScale(0.15);
+    this.laser.setTint(0x800000);
+
+    let velocityX = 0;
+    let velocityY = 0;
+
+    if (this.sprite.anims.currentAnim.key === "left") {
+      velocityX = -laserSpeed;
+    } else if (this.sprite.anims.currentAnim.key === "right") {
+      velocityX = laserSpeed;
+    } else if (this.sprite.anims.currentAnim.key === "up") {
+      velocityY = -laserSpeed;
+    } else if (this.sprite.anims.currentAnim.key === "down") {
+      velocityY = laserSpeed;
+    }
+
+    // set the lasers velocity based on determined direction
+    this.laser.setVelocity(velocityX, velocityY);
+    this.laser.setVisible(true);
+    this.laser.setActive(true);
   }
 }
 
