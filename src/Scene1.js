@@ -19,7 +19,6 @@ class Scene1 extends Phaser.Scene {
     this.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
     this.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
     this.load.image("door-tiles", "/tilesets/!$Objects_1.png");
-    this.load.image("knife", "weapons/weapon_knife.png");
 
     this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
     this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
@@ -64,10 +63,6 @@ class Scene1 extends Phaser.Scene {
 
     const doorLayer = map.createLayer("Door", doorTileset, 0, 0);
 
-    const knives = this.physics.add.group({
-      classType: Phaser.Physics.Arcade.Image,
-    });
-
     wallsLayer.setCollisionByProperty({ collides: true });
     machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
     doorLayer.setCollisionByProperty({ collides: true });
@@ -96,8 +91,6 @@ class Scene1 extends Phaser.Scene {
       null,
       this
     );
-
-    this.player.setKnives(knives);
 
     enemy = new Enemy(this, 800, 300);
     enemy.sprite.setImmovable(true);
@@ -152,9 +145,6 @@ class Scene1 extends Phaser.Scene {
       null,
       this
     );
-
-    this.physics.add.collider(knives, wallsLayer);
-    this.physics.add.collider(knives, enemy.sprite);
 
     platform = this.physics.add.staticGroup();
     let door = platform.create(160, 0, "door").setAlpha(0);
