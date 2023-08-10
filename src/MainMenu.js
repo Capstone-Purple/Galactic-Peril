@@ -42,21 +42,29 @@ class MainMenu extends Phaser.Scene {
             });
           }, 3500);
 
+          
         // this.add.text(450,100, "Galactic Peril!", { fontFamily: "Comic Sans MS", font: "60px Impact", color: "red", stroke: '#ffff00', strokeThickness: 2})
+        if (localStorage.getItem('scene') === null){
+            const startBtn = this.add.text(450,300, "New Game", { fontFamily: "Comic Sans MS", font: "30px Impact", })
+            startBtn.setInteractive({cursor: 'pointer'}).on('pointerdown', () => { 
+                localStorage.clear();
+                this.scene.start('Scene1')
+            });
+        } else {
+            const startBtn = this.add.text(450,300, "New Game", { fontFamily: "Comic Sans MS", font: "30px Impact", })
+            startBtn.setInteractive({cursor: 'pointer'}).on('pointerdown', () => { 
+                localStorage.clear();
+                this.scene.start('Scene1')
+            });
 
-        const startBtn = this.add.text(400,300, "New Game", { fontFamily: "Comic Sans MS", font: "30px Impact", })
-        startBtn.setInteractive().on('pointerdown', () => { 
-            localStorage.clear();
-            this.scene.start('Scene1') });
-
-        const continueBtn = this.add.text(400,400, "Continue Game", { fontFamily: "Comic Sans MS", font: "30px Impact"})
-        continueBtn.setInteractive().on('pointerdown', () => { 
-            let scene = localStorage.getItem('scene')
-            if (scene) {
-                this.scene.start(scene) 
-            } //else { console.log('THE SCENE DID NOT SAVE')}
-        });
-
+            const continueBtn = this.add.text(400,400, "Continue Game", { fontFamily: "Comic Sans MS", font: "30px Impact"})
+            continueBtn.setInteractive({cursor: 'pointer'}).on('pointerdown', () => { 
+                let scene = localStorage.getItem('scene')
+                if (scene) {
+                    this.scene.start(scene) 
+                } //else { console.log('THE SCENE DID NOT SAVE')}
+            });
+        }
 
     }
 
