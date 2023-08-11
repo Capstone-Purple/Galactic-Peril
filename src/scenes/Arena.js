@@ -6,7 +6,7 @@ const Enemy = require('../enemy.js').default;
 
 let player;
 let enemy;
-let item1;
+let pistol;
 
 class Arena extends Phaser.Scene {
     constructor() {
@@ -17,7 +17,8 @@ class Arena extends Phaser.Scene {
         this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
         this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
         this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
-        this.load.image("item1", "/images/alienPistol.png");
+        this.load.image("pistol", "/images/alienPistol.png");
+        this.load.image("empty-inv", "/images/inventoryIcon.png");
         this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
             frameWidth: 80,
             frameHeight: 80,
@@ -52,9 +53,9 @@ class Arena extends Phaser.Scene {
         //     player.healthBar.decrease(damageAmount);
         // });
 
-        item1 = this.physics.add.sprite(200, 200, "item1");
-        this.physics.add.overlap(player.sprite, item1, function() {
-            player.acquireItem(item1.texture.key);
+        pistol = this.physics.add.sprite(200, 200, "pistol");
+        this.physics.add.overlap(player.sprite, pistol, function() {
+            player.acquireItem(pistol.texture.key);
         });
     }
 
