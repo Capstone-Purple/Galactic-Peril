@@ -92,7 +92,7 @@ class Enemy {
     this.pickAnimation(vector);
 
   //health connected to top of enemy
-  this.healthBar.x = this.sprite.x - 36;
+  this.healthBar.x = this.sprite.x - 41;
   this.healthBar.y = this.sprite.y - 58;
 
   //damage amount

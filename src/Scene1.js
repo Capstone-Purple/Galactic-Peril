@@ -149,9 +149,16 @@ class Scene1 extends Phaser.Scene {
 
     // this enables collisions between lasers and enemies
     this.physics.add.collider(
-      player.laser,
       enemy.sprite,
-      this.handleLaserEnemyCollision,
+      player.laser,
+      function(enemySprite, laser) {
+        const damageAmount = 0.5;
+        const isEnemyDead = enemy.sprite.healthBar.decrease(damageAmount);
+        if (isEnemyDead) {
+          enemySprite.destroy();
+        }
+      },
+      //this.handleLaserEnemyCollision,
       null,
       this
     );
