@@ -8,6 +8,7 @@ const sceneArr = [
   Scene1,
   Example2,
   endingScene,
+  endingSpaceShip,
   Arena,
 ];
 
@@ -26,6 +27,7 @@ import Scene1 from "./Scene1";
 import Example2 from "./Example2";
 import endingScene from "./endingScene";
 import Arena from "./scenes/Arena.js";
+import endingSpaceShip from "./endingSpaceShipScene";
 
 let config = {
   type: Phaser.AUTO,
