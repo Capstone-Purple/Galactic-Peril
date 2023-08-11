@@ -151,9 +151,21 @@ class Scene1 extends Phaser.Scene {
 
     // this enables collisions between lasers and enemies
     this.physics.add.collider(
-      player.laser,
       enemy.sprite,
-      this.handleLaserEnemyCollision,
+      player.laser,
+    
+      function() {
+        player.laser.setActive(false);
+        player.laser.setVisible(false);
+        const damageAmount = 25;
+       enemy.healthBar.decrease(damageAmount);
+       
+        if (enemy.healthBar.value === 0) {
+          enemy.sprite.body.setEnable(false);
+          enemy.sprite.disableBody(true, true);
+          enemy.healthBar.bar.setVisible(false);
+        }
+      },
       null,
       this
     );
@@ -209,11 +221,6 @@ class Scene1 extends Phaser.Scene {
       // console.log(player)
       this.scene.start("MainMenu");
     });
-  }
-
-  handleLaserEnemyCollision(laser, enemy) {
-    laser.setActive(false);
-    laser.setVisible(false);
   }
 
   update() {
