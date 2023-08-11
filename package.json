@@ -7,6 +7,7 @@
     "build": "webpack",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run build -- --watch & npm run start",
     "publish": "npm run build & npm run start"
   },
   "repository": {

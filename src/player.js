@@ -1,4 +1,6 @@
 const Phaser = require("phaser");
+const Inventory = require("./inventory.js").default;
+
 
 class HealthBar {
   constructor(scene, x, y) {
@@ -56,6 +58,8 @@ class Player {
     this.scene = scene;
 
     this.healthBar = new HealthBar(scene, posX - 41, posY - 58);
+    
+    this.inventory = new Inventory(scene, 320, 530, 1, 3, 70);
 
     const anims = scene.anims;
 
@@ -127,6 +131,11 @@ class Player {
     this.healthBar.decrease(damageAmount);
   }
 
+  acquireItem(itemKey) {
+    console.log('In acquireItem function');
+    this.inventory.addItem(itemKey);
+  }
+
   shootLaser() {
     // speed
     const laserSpeed = 300;
@@ -156,4 +165,4 @@ class Player {
   }
 }
 
-export default Player;
+export default Player
