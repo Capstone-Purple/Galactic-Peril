@@ -3,6 +3,8 @@ const Player = require("./player.js").default;
 
 let player;
 let platform;
+let backgroundLayer;
+const moveSpeed = 1;
 
 class beginningScene extends Phaser.Scene {
   constructor() {
