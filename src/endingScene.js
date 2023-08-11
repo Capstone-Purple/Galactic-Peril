@@ -62,12 +62,22 @@ class endingScene extends Phaser.Scene {
     ]);
 
     platform = this.physics.add.staticGroup();
-    // let door = platform.create(560, 80, "door").setAlpha(0);
+    let door = platform.create(560, 450, "door").setAlpha(100);
     this.physics.add.collider(
       player.sprite,
       doorLayer,
       function () {
         this.scene.start("Scene1");
+      },
+      null,
+      this
+    );
+
+    this.physics.add.collider(
+      player.sprite,
+      door,
+      function () {
+        this.scene.start("endingSpaceShip");
       },
       null,
       this
