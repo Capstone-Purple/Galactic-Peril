@@ -58,15 +58,8 @@ class Player {
     this.scene = scene;
 
     this.healthBar = new HealthBar(scene, posX - 41, posY - 58);
-
-    const imageTexture1 = "/images/inventoryIcon.png";
-    const imageTexture2 = "/images/inventoryIcon.png";
-    const imageTexture3 = "/images/inventoryIcon.png";
-    this.inventory = new Inventory(scene, 320, 530, 1, 3, 70, [
-      imageTexture1,
-      imageTexture2,
-      imageTexture3
-    ]);
+    
+    this.inventory = new Inventory(scene, 320, 530, 1, 3, 70);
 
     const anims = scene.anims;
 
