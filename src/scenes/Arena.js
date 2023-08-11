@@ -53,9 +53,11 @@ class Arena extends Phaser.Scene {
         //     player.healthBar.decrease(damageAmount);
         // });
 
+        // HOW TO ADD ITEMS TO BE COLLECTED!!!!
         pistol = this.physics.add.sprite(200, 200, "pistol");
         this.physics.add.overlap(player.sprite, pistol, function() {
             player.acquireItem(pistol.texture.key);
+            pistol.destroy();
         });
     }
 
