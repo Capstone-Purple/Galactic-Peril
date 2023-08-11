@@ -69,6 +69,7 @@ class Scene1 extends Phaser.Scene {
     doorLayer.setCollisionByProperty({ collides: true });
 
     player = new Player(this, 400, 300);
+
     this.physics.add.collider(player.sprite, [
       wallsLayer,
       machinaryAndScreensLayer,
@@ -157,12 +158,12 @@ class Scene1 extends Phaser.Scene {
     );
 
     platform = this.physics.add.staticGroup();
-    let door = platform.create(160, 0, "door").setAlpha(0);
+    let door = platform.create(0, 325, "door").setAlpha(50);
     this.physics.add.collider(
       player.sprite,
       door,
       function () {
-        this.scene.start("Example2");
+        this.scene.start("beginningScene");
       },
       null,
       this
