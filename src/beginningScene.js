@@ -58,7 +58,7 @@ class beginningScene extends Phaser.Scene {
     ]);
 
     platform = this.physics.add.staticGroup();
-    let door = platform.create(1100, 325, "door").setAlpha(50);
+    let door = platform.create(1125, 325, "door").setAlpha(50);
     this.physics.add.collider(
       player.sprite,
       door,

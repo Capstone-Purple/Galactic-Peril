@@ -69,6 +69,7 @@ class Scene1 extends Phaser.Scene {
     doorLayer.setCollisionByProperty({ collides: true });
 
     player = new Player(this, 400, 300);
+
     this.physics.add.collider(player.sprite, [
       wallsLayer,
       machinaryAndScreensLayer,
