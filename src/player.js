@@ -96,7 +96,7 @@ class Player {
       this.textBox.hideText();
       this.textTimer = null;
     }, displayTime);
-
+  
     const anims = scene.anims;
 
     anims.create({
