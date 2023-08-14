@@ -25,6 +25,7 @@ class beginningScene extends Phaser.Scene {
       frameWidth: 80,
       frameHeight: 80,
     });
+    this.load.audio("background-music", ["music/background-music.mp3"]);
   }
 
   create() {
@@ -38,6 +39,18 @@ class beginningScene extends Phaser.Scene {
 
     const medical1Tileset = map.addTilesetImage("medical1", "medical1-tiles");
     const medical2Tileset = map.addTilesetImage("medical2", "medical2-tiles");
+
+    this.music = this.sound.add("background-music");
+    const musicConfig = {
+      mute: false,
+      volume: 1,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0,
+    };
+    this.music.play(musicConfig);
 
     map.createLayer("Background", backgroundTileset, 0, 0);
     const floorLayer = map.createLayer("Ground", floorTileset, 0, 0);

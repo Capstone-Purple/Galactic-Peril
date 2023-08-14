@@ -1,7 +1,6 @@
 const Phaser = require("phaser");
 const Inventory = require("./inventory.js").default;
 
-
 class HealthBar {
   constructor(scene, x, y) {
     this.bar = new Phaser.GameObjects.Graphics(scene);
@@ -58,7 +57,7 @@ class Player {
     this.scene = scene;
 
     this.healthBar = new HealthBar(scene, posX - 41, posY - 58);
-    
+
     this.inventory = new Inventory(scene, 320, 530, 1, 3, 70);
 
     const anims = scene.anims;
@@ -132,7 +131,7 @@ class Player {
   }
 
   acquireItem(itemKey) {
-    console.log('In acquireItem function');
+    console.log("In acquireItem function");
     this.inventory.addItem(itemKey);
   }
 
@@ -144,6 +143,10 @@ class Player {
     this.laser.setPosition(this.sprite.x, this.sprite.y - 20);
     this.laser.setScale(0.15);
     this.laser.setTint(0x800000);
+    this.scene.sound.play("laser-sound", {
+      volume: 1,
+      loop: false,
+    });
 
     let velocityX = 0;
     let velocityY = 0;
@@ -165,4 +168,4 @@ class Player {
   }
 }
 
-export default Player
+export default Player;
