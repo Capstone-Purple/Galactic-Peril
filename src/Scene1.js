@@ -72,8 +72,11 @@ class Scene1 extends Phaser.Scene {
     wallsLayer.setCollisionByProperty({ collides: true });
     machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
     doorLayer.setCollisionByProperty({ collides: true });
-
+    
+    const prevRoom = this.registry.get("prevRoom");
+    console.log(prevRoom);
     player = new Player(this, 400, 300);
+    this.registry.set("prevRoom", "Scene1");
 
     this.physics.add.collider(player.sprite, [
       wallsLayer,
