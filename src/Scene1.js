@@ -54,8 +54,6 @@ class Scene1 extends Phaser.Scene {
     const screensTileset = map.addTilesetImage("screens", "screens-tiles");
     const doorTileset = map.addTilesetImage("door", "door-tiles");
 
-    this.laserSound = this.sound.add("laser-sound");
-
     map.createLayer("Background", backgroundTileset, 0, 0);
     map.createLayer("Ground", floorTileset, 0, 0);
     const wallsLayer = map.createLayer("Walls", wallTileset, 0, 0);
@@ -72,7 +70,7 @@ class Scene1 extends Phaser.Scene {
     wallsLayer.setCollisionByProperty({ collides: true });
     machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
     doorLayer.setCollisionByProperty({ collides: true });
-    
+
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
     player = new Player(this, 400, 300);

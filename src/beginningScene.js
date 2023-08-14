@@ -26,6 +26,7 @@ class beginningScene extends Phaser.Scene {
       frameHeight: 80,
     });
     this.load.audio("background-music", ["music/background-music.mp3"]);
+    this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
   }
 
   create() {
@@ -43,7 +44,7 @@ class beginningScene extends Phaser.Scene {
     this.music = this.sound.add("background-music");
     const musicConfig = {
       mute: false,
-      volume: 1,
+      volume: 0.3,
       rate: 1,
       detune: 0,
       seek: 0,
@@ -64,7 +65,7 @@ class beginningScene extends Phaser.Scene {
 
     wallsLayer.setCollisionByProperty({ collides: true });
     medicalLayer.setCollisionByProperty({ collides: true });
-    
+
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
     player = new Player(this, 260, 250);
