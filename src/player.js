@@ -1,6 +1,26 @@
 const Phaser = require("phaser");
 const Inventory = require("./inventory.js").default;
 
+class TextBox {
+  constructor(scene, x, y) {
+    this.scene = scene;
+    this.x = x;
+    this.y = y;
+    this.textBox = scene.add.text(x, y, '', { fontFamily: 'Arial', fontSize: 10, color: '#3b4f8c' });
+    this.textBox.setOrigin(0.5, 1);
+    this.textBox.setDepth(1);
+    this.textBox.setVisible(false);
+  }
+
+  showText(text) {
+    this.textBox.setText(text);
+    this.textBox.setVisible(true);
+  }
+
+  hideText() {
+    this.textBox.setVisible(false);
+  }
+}
 
 class HealthBar {
   constructor(scene, x, y) {
@@ -60,6 +80,22 @@ class Player {
     this.healthBar = new HealthBar(scene, posX - 41, posY - 58);
     
     this.inventory = new Inventory(scene, 320, 530, 1, 3, 70);
+
+    this.textBox = new TextBox(scene, posX - 50, posY - 100);
+    this.textTimer = null;
+  }
+
+  enterNewScene(scene, text, displayTime) {
+    this.textBox.showText(text);
+
+    if (this.textTimer) {
+      clearTimeout(this.textTimer);
+    }
+
+    this.textTimer = setTimeout(() => {
+      this.textBox.hideText();
+      this.textTimer = null;
+    }, displayTime);
 
     const anims = scene.anims;
 

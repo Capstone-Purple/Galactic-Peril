@@ -221,6 +221,12 @@ class Scene1 extends Phaser.Scene {
       // console.log(player)
       this.scene.start("MainMenu");
     });
+
+    //new scene text and duration
+    let enterSceneText = "hello testing";
+    const displayTime = 5000;
+
+    player.enterNewScene(this, enterSceneText, displayTime);
   }
 
   update() {
