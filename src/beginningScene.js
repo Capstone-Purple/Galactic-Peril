@@ -1,5 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
+const placeMenus = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -87,6 +88,8 @@ class beginningScene extends Phaser.Scene {
       null,
       this
     );
+
+    placeMenus(this, player);
   }
 
   update() {
