@@ -3,6 +3,7 @@ const Player = require("./player.js").default;
 
 let player;
 let platform;
+let vending1,plate1,plate2;
 
 class Cafeteria extends Phaser.Scene {
     constructor() {
@@ -49,15 +50,34 @@ class Cafeteria extends Phaser.Scene {
         furnitureLayer
       ]);
 
-      player.healthBar.bar.setDepth(1000)
+      player.sprite.setDepth(1)
+      player.healthBar.bar.setDepth(10)
 
       platform = this.physics.add.staticGroup();
-      let Vending1 = platform.create(576, 88, "vendingM")
+      vending1 = platform.create(570, 97, "vendingM");
 
-      this.physics.add.collider(player.sprite, Vending1, function () {
-        Vending1.destroy()
-      })
+      this.physics.add.overlap(player.sprite, vending1, function () {
+        this.input.keyboard.on(
+          "keyup-ENTER",
+          getItem,
+          this
+        );
+      },
+      null,
+      this
+      );
 
+      function getItem(event) {
+        this.input.keyboard.off("keyup-ENTER", getItem, this)
+        // Vending1.setVisible(false);
+        vending1.destroy();
+        //code to add drink to inventory to restore health
+        setTimeout(() => {
+          // Vending1.setVisible(true)
+          vending1 = platform.create(570, 97, "vendingM")
+          
+        }, 3000) //use60000 for 1 minute wait time 
+      };
 
     }
 
