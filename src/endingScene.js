@@ -53,13 +53,16 @@ class endingScene extends Phaser.Scene {
     doorLayer.setCollisionByProperty({ collides: true });
     doorFrameLayer.setCollisionByProperty({ collides: true });
     map.createLayer("Ship", shipTileset, 0, 0);
-
+    
+    const prevRoom = this.registry.get("prevRoom");
+    console.log(prevRoom);
     player = new Player(this, 560, 150);
     this.physics.add.collider(player.sprite, [
       floorLayer,
       doorFrameLayer,
       //   doorLayer,
     ]);
+    this.registry.set("prevRoom", "endingScene");
 
     platform = this.physics.add.staticGroup();
     let door = platform.create(560, 450, "door").setAlpha(100);
