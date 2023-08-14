@@ -31,6 +31,8 @@ class Scene1 extends Phaser.Scene {
       frameWidth: 100,
       frameHeight: 100,
     });
+
+    this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
   }
 
   create() {
@@ -51,6 +53,8 @@ class Scene1 extends Phaser.Scene {
     );
     const screensTileset = map.addTilesetImage("screens", "screens-tiles");
     const doorTileset = map.addTilesetImage("door", "door-tiles");
+
+    this.laserSound = this.sound.add("laser-sound");
 
     map.createLayer("Background", backgroundTileset, 0, 0);
     map.createLayer("Ground", floorTileset, 0, 0);
@@ -156,13 +160,13 @@ class Scene1 extends Phaser.Scene {
     this.physics.add.collider(
       enemy.sprite,
       player.laser,
-    
-      function() {
+
+      function () {
         player.laser.setActive(false);
         player.laser.setVisible(false);
         const damageAmount = 25;
-       enemy.healthBar.decrease(damageAmount);
-       
+        enemy.healthBar.decrease(damageAmount);
+
         if (enemy.healthBar.value === 0) {
           enemy.sprite.body.setEnable(false);
           enemy.sprite.disableBody(true, true);
