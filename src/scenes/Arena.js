@@ -59,6 +59,11 @@ class Arena extends Phaser.Scene {
             player.acquireItem(pistol.texture.key);
             pistol.destroy();
         });
+
+        console.log(this.registry.getAll());
+        this.registry.set('goats', 'awesome');
+        console.log(this.registry.getAll());
+        console.log(this.registry.get('goats'));
     }
 
     update() {
