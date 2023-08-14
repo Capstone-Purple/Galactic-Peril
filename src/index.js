@@ -6,7 +6,6 @@ const sceneArr = [
   MainMenu,
   beginningScene,
   Scene1,
-  Example2,
   endingScene,
   endingSpaceShip,
   Arena,
@@ -24,7 +23,6 @@ let platform;
 import MainMenu from "./MainMenu";
 import beginningScene from "./beginningScene";
 import Scene1 from "./Scene1";
-import Example2 from "./Example2";
 import endingScene from "./endingScene";
 import Arena from "./scenes/Arena.js";
 import endingSpaceShip from "./endingSpaceShipScene";
