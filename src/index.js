@@ -9,6 +9,7 @@ const sceneArr = [
   Example2,
   endingScene,
   Arena,
+  Cafeteria,
 ];
 
 const path = window.location.pathname;
@@ -26,6 +27,7 @@ import Scene1 from "./Scene1";
 import Example2 from "./Example2";
 import endingScene from "./endingScene";
 import Arena from "./scenes/Arena.js";
+import Cafeteria from "./Cafeteria";
 
 let config = {
   type: Phaser.AUTO,
