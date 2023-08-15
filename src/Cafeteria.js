@@ -14,7 +14,7 @@ class Cafeteria extends Phaser.Scene {
       this.load.image("vendingM", "/images/vendingmachine.png");
       this.load.image("plate1", "/images/plate1.png")
       this.load.image("plate2", "/images/plate2.png")
-      // this.load.image("background-tiles", "tilesets/Starfield_1.png");
+      this.load.image("background-tiles", "tilesets/Starfield_1.png");
       this.load.image("floorTiles", "tilesets/A5_SciFi.png");
       this.load.image("wallTiles", "tilesets/A4_SciFi.png");
       this.load.image("furnitureTiles", "tilesets/SciFi_Deco_3.png");
@@ -32,10 +32,10 @@ class Cafeteria extends Phaser.Scene {
 
     create() {
       const map = this.make.tilemap({ key: "cafeteriaScene" });
-      // const backgroundTileset = map.addTilesetImage(
-      //   "background",
-      //   "background-tiles"
-      // );
+      const backgroundTileset = map.addTilesetImage(
+        "background",
+        "background-tiles"
+      );
 
       const floorTileSet = map.addTilesetImage('floor', 'floorTiles');
       const wallTileSet = map.addTilesetImage('wall', 'wallTiles');
@@ -43,6 +43,8 @@ class Cafeteria extends Phaser.Scene {
       const door1TileSet = map.addTilesetImage('door', 'door1Tile');
       const door2TileSet = map.addTilesetImage('door', 'door2Tile');
 
+      map.createLayer("Background", backgroundTileset, 0, 0);
+      
       const floorLayer = map.createLayer("Floors", floorTileSet, 0, 0);
       const wallLayer = map.createLayer("Walls", wallTileSet, 0, 0);
       const furnitureLayer = map.createLayer("Furniture", furnitureTileSet, 0, 0);
