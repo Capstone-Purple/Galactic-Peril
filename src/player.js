@@ -81,7 +81,7 @@ class Player {
     
     this.inventory = new Inventory(scene, 320, 530, 1, 3, 70);
 
-    this.textBox = new TextBox(scene, posX - 50, posY + 450);
+    this.textBox = new TextBox(scene, posX - 50, posY + 530);
     this.textTimer = null;
   
     const anims = scene.anims;
