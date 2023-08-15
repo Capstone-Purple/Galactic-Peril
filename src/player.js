@@ -83,19 +83,19 @@ class Player {
 
     this.textBox = new TextBox(scene, posX - 50, posY - 100);
     this.textTimer = null;
-  }
+  
 
-  enterNewScene(scene, text, displayTime) {
-    this.textBox.showText(text);
+  // enterNewScene(scene, text, displayTime) {
+  //   this.textBox.showText(text);
 
-    if (this.textTimer) {
-      clearTimeout(this.textTimer);
-    }
+  //   if (this.textTimer) {
+  //     clearTimeout(this.textTimer);
+  //   }
 
-    this.textTimer = setTimeout(() => {
-      this.textBox.hideText();
-      this.textTimer = null;
-    }, displayTime);
+  //   this.textTimer = setTimeout(() => {
+  //     this.textBox.hideText();
+  //     this.textTimer = null;
+  //   }, displayTime);
   
     const anims = scene.anims;
 
@@ -172,6 +172,19 @@ class Player {
     this.inventory.addItem(itemKey);
   }
 
+  enterNewScene(scene, text, displayTime) {
+    this.textBox.showText(text);
+
+    if (this.textTimer) {
+      clearTimeout(this.textTimer);
+    }
+
+    this.textTimer = setTimeout(() => {
+      this.textBox.hideText();
+      this.textTimer = null;
+    }, displayTime);
+  }
+  
   shootLaser() {
     // speed
     const laserSpeed = 300;
