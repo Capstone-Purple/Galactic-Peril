@@ -3,6 +3,8 @@
  */
 const Player = require('../player.js').default;
 const Enemy = require('../enemy.js').default;
+const {loadAssets, placeMenus} = require ("../boilerplate.js").default;
+
 
 let player;
 let enemy;
@@ -14,19 +16,20 @@ class Arena extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
-        this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
+        loadAssets(this);
+        // this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
+        // this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
         this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
-        this.load.image("pistol", "/images/alienPistol.png");
-        this.load.image("empty-inv", "/images/inventoryIcon.png");
-        this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
-            frameWidth: 80,
-            frameHeight: 80,
-        });
-        this.load.spritesheet("alien", "/images/Alien1.png", {
-            frameWidth: 100,
-            frameHeight: 100,
-        });
+        // this.load.image("pistol", "/images/alienPistol.png");
+        // this.load.image("empty-inv", "/images/inventoryIcon.png");
+        // this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
+        //     frameWidth: 80,
+        //     frameHeight: 80,
+        // });
+        // this.load.spritesheet("alien", "/images/Alien1.png", {
+        //     frameWidth: 100,
+        //     frameHeight: 100,
+        // });
     }
 
     create() {
@@ -60,10 +63,7 @@ class Arena extends Phaser.Scene {
             pistol.destroy();
         });
 
-        console.log(this.registry.getAll());
-        this.registry.set('goats', 'awesome');
-        console.log(this.registry.getAll());
-        console.log(this.registry.get('goats'));
+        placeMenus(this);
     }
 
     update() {
