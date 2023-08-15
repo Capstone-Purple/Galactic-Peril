@@ -1,5 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
+const placeMenus = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -9,6 +10,7 @@ const moveSpeed = 1;
 class beginningScene extends Phaser.Scene {
   constructor() {
     super({ key: "beginningScene" });
+    this.musicPlaying = false;
   }
 
   preload() {
@@ -25,6 +27,8 @@ class beginningScene extends Phaser.Scene {
       frameWidth: 80,
       frameHeight: 80,
     });
+    this.load.audio("background-music", ["music/background-music.mp3"]);
+    this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
   }
 
   create() {
@@ -39,6 +43,21 @@ class beginningScene extends Phaser.Scene {
     const medical1Tileset = map.addTilesetImage("medical1", "medical1-tiles");
     const medical2Tileset = map.addTilesetImage("medical2", "medical2-tiles");
 
+    if (!this.musicPlaying) {
+      this.music = this.sound.add("background-music");
+      const musicConfig = {
+        mute: false,
+        volume: 0.3,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: true,
+        delay: 0,
+      };
+      this.music.play(musicConfig);
+      this.musicPlaying = true;
+    }
+
     map.createLayer("Background", backgroundTileset, 0, 0);
     const floorLayer = map.createLayer("Ground", floorTileset, 0, 0);
     const wallsLayer = map.createLayer("Walls", wallTileset, 0, 0);
@@ -52,12 +71,15 @@ class beginningScene extends Phaser.Scene {
     wallsLayer.setCollisionByProperty({ collides: true });
     medicalLayer.setCollisionByProperty({ collides: true });
 
+    const prevRoom = this.registry.get("prevRoom");
+    console.log(prevRoom);
     player = new Player(this, 260, 250);
     this.physics.add.collider(player.sprite, [
       floorLayer,
       wallsLayer,
       medicalLayer,
     ]);
+    this.registry.set("prevRoom", "beginningScene");
 
     platform = this.physics.add.staticGroup();
     let door = platform.create(1125, 325, "door").setAlpha(50);
@@ -70,6 +92,8 @@ class beginningScene extends Phaser.Scene {
       null,
       this
     );
+
+    placeMenus(this, player);
   }
 
   update() {

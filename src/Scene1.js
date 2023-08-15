@@ -1,6 +1,7 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
 const Enemy = require("./enemy.js").default;
+const placeMenus = require ("./boilerplate.js").default;
 
 let player;
 let enemy;
@@ -31,6 +32,8 @@ class Scene1 extends Phaser.Scene {
       frameWidth: 100,
       frameHeight: 100,
     });
+
+    this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
   }
 
   create() {
@@ -69,7 +72,10 @@ class Scene1 extends Phaser.Scene {
     machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
     doorLayer.setCollisionByProperty({ collides: true });
 
+    const prevRoom = this.registry.get("prevRoom");
+    console.log(prevRoom);
     player = new Player(this, 400, 300);
+    this.registry.set("prevRoom", "Scene1");
 
     this.physics.add.collider(player.sprite, [
       wallsLayer,
@@ -151,9 +157,21 @@ class Scene1 extends Phaser.Scene {
 
     // this enables collisions between lasers and enemies
     this.physics.add.collider(
-      player.laser,
       enemy.sprite,
-      this.handleLaserEnemyCollision,
+      player.laser,
+
+      function () {
+        player.laser.setActive(false);
+        player.laser.setVisible(false);
+        const damageAmount = 25;
+        enemy.healthBar.decrease(damageAmount);
+
+        if (enemy.healthBar.value === 0) {
+          enemy.sprite.body.setEnable(false);
+          enemy.sprite.disableBody(true, true);
+          enemy.healthBar.bar.setVisible(false);
+        }
+      },
       null,
       this
     );
@@ -179,41 +197,8 @@ class Scene1 extends Phaser.Scene {
       null,
       this
     );
-
-    const mainMenu = this.add.text(600, 600, "Main Menu", {
-      fontFamily: "Comic Sans MS",
-      font: "30px Impact",
-    });
-    mainMenu.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
-      this.scene.start("MainMenu");
-    });
-
-    const saveAndQuit = this.add.text(300, 600, "Save & Quit", {
-      fontFamily: "Comic Sans MS",
-      font: "30px Impact",
-    });
-    saveAndQuit.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
-      localStorage.setItem("scene", this.scene.key);
-      localStorage.setItem(
-        "player",
-        JSON.stringify({ x: player.sprite.x, y: player.sprite.y })
-      );
-      localStorage.setItem(
-        "enemy",
-        JSON.stringify({ x: enemy.sprite.x, y: enemy.sprite.y })
-      );
-      localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
-
-      //SAVE PLAYER INVENTORY
-      //WILL ITEMS COLLECTED REMAIN COLLECTED??
-      // console.log(player)
-      this.scene.start("MainMenu");
-    });
-  }
-
-  handleLaserEnemyCollision(laser, enemy) {
-    laser.setActive(false);
-    laser.setVisible(false);
+    
+    placeMenus(this, player, enemy);
   }
 
   update() {

@@ -16,6 +16,7 @@ class MainMenu extends Phaser.Scene {
   create() {
     // this.add.image(400,500,'bg2').setScale(3)
     this.add.image(580, 400, "bg2").setScale(0.75);
+    this.registry.set("prevRoom", null);
 
     // let line = 0;
     // const myMessage = ["Welcome To: ", "Galactic Peril ! !"]
