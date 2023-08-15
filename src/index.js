@@ -9,6 +9,7 @@ const sceneArr = [
   endingScene,
   endingSpaceShip,
   Arena,
+  Cafeteria,
 ];
 
 const path = window.location.pathname;
@@ -25,6 +26,7 @@ import beginningScene from "./beginningScene";
 import Scene1 from "./Scene1";
 import endingScene from "./endingScene";
 import Arena from "./scenes/Arena.js";
+import Cafeteria from "./Cafeteria";
 import endingSpaceShip from "./endingSpaceShipScene";
 
 let config = {

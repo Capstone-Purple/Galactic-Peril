@@ -183,7 +183,7 @@ class Scene1 extends Phaser.Scene {
       player.sprite,
       door,
       function () {
-        this.scene.start("beginningScene");
+        this.scene.start("Cafeteria");
       },
       null,
       this
