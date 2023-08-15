@@ -26,11 +26,8 @@ import beginningScene from "./beginningScene";
 import Scene1 from "./Scene1";
 import endingScene from "./endingScene";
 import Arena from "./scenes/Arena.js";
-<<<<<<< HEAD
 import Cafeteria from "./Cafeteria";
-=======
 import endingSpaceShip from "./endingSpaceShipScene";
->>>>>>> main
 
 let config = {
   type: Phaser.AUTO,
