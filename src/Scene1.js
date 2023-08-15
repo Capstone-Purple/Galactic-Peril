@@ -1,6 +1,7 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
 const Enemy = require("./enemy.js").default;
+const placeMenus = require ("./boilerplate.js").default;
 
 let player;
 let enemy;
@@ -31,6 +32,8 @@ class Scene1 extends Phaser.Scene {
       frameWidth: 100,
       frameHeight: 100,
     });
+
+    this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
   }
 
   create() {
@@ -69,7 +72,10 @@ class Scene1 extends Phaser.Scene {
     machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
     doorLayer.setCollisionByProperty({ collides: true });
 
+    const prevRoom = this.registry.get("prevRoom");
+    console.log(prevRoom);
     player = new Player(this, 400, 300);
+    this.registry.set("prevRoom", "Scene1");
 
     this.physics.add.collider(player.sprite, [
       wallsLayer,
@@ -153,13 +159,13 @@ class Scene1 extends Phaser.Scene {
     this.physics.add.collider(
       enemy.sprite,
       player.laser,
-    
-      function() {
+
+      function () {
         player.laser.setActive(false);
         player.laser.setVisible(false);
         const damageAmount = 25;
-       enemy.healthBar.decrease(damageAmount);
-       
+        enemy.healthBar.decrease(damageAmount);
+
         if (enemy.healthBar.value === 0) {
           enemy.sprite.body.setEnable(false);
           enemy.sprite.disableBody(true, true);
@@ -176,7 +182,7 @@ class Scene1 extends Phaser.Scene {
       player.sprite,
       door,
       function () {
-        this.scene.start("beginningScene");
+        this.scene.start("Cafeteria");
       },
       null,
       this
@@ -227,6 +233,8 @@ class Scene1 extends Phaser.Scene {
     const displayTime = 7000;
 
     player.enterNewScene(this, enterSceneText, displayTime);
+    
+    placeMenus(this, player, enemy);
   }
 
   update() {
