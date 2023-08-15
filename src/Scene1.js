@@ -241,15 +241,6 @@ class Scene1 extends Phaser.Scene {
   update() {
     player.update();
     enemy.update(player);
-
-  //   if (player.sprite.x > 500 && player.sprite.y > 300) {
-  //     const textBox = new TextBox(this, player.sprite.x, player.sprite.y - 50);
-  //     textBox.showText("Locked! The key has to be around here somewhere");
-      
-  //     setTimeout(() => {
-  //       textBox.hideText();
-  //     }, 5000);
-  // }
 }
 }
 
