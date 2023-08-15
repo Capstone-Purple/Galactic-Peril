@@ -82,6 +82,12 @@ class endingScene extends Phaser.Scene {
       null,
       this
     );
+
+    //new scene text and duration
+    let enterSceneText = "An escape pod! This might be my way out of here.";
+    const displayTime = 7000;
+    
+    player.enterNewScene(this, enterSceneText, displayTime);
   }
 
   update() {

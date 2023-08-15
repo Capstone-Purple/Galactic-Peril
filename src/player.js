@@ -6,7 +6,7 @@ class TextBox {
     this.scene = scene;
     this.x = x;
     this.y = y;
-    this.textBox = scene.add.text(x, y, '', { fontFamily: 'Arial', fontSize: 10, color: '#3b4f8c' });
+    this.textBox = scene.add.text(x, y, '', { fontFamily: 'Arial', fontSize: 20, color: '#ffffff' });
     this.textBox.setOrigin(0.5, 1);
     this.textBox.setDepth(1);
     this.textBox.setVisible(false);
@@ -81,21 +81,8 @@ class Player {
     
     this.inventory = new Inventory(scene, 320, 530, 1, 3, 70);
 
-    this.textBox = new TextBox(scene, posX - 50, posY - 100);
+    this.textBox = new TextBox(scene, posX - 50, posY + 450);
     this.textTimer = null;
-  
-
-  // enterNewScene(scene, text, displayTime) {
-  //   this.textBox.showText(text);
-
-  //   if (this.textTimer) {
-  //     clearTimeout(this.textTimer);
-  //   }
-
-  //   this.textTimer = setTimeout(() => {
-  //     this.textBox.hideText();
-  //     this.textTimer = null;
-  //   }, displayTime);
   
     const anims = scene.anims;
 
@@ -184,7 +171,7 @@ class Player {
       this.textTimer = null;
     }, displayTime);
   }
-  
+
   shootLaser() {
     // speed
     const laserSpeed = 300;

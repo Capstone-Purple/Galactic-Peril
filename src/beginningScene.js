@@ -70,6 +70,12 @@ class beginningScene extends Phaser.Scene {
       null,
       this
     );
+
+    //new scene text and duration
+    let enterSceneText = "What's going on? Where is everyone!?";
+    const displayTime = 7000;
+    
+    player.enterNewScene(this, enterSceneText, displayTime);
   }
 
   update() {

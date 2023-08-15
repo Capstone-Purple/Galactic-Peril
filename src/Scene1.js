@@ -223,8 +223,8 @@ class Scene1 extends Phaser.Scene {
     });
 
     //new scene text and duration
-    let enterSceneText = "hello testing";
-    const displayTime = 5000;
+    let enterSceneText = "Hold on, what... who are you? This isn't exactly how I imagined my day going.";
+    const displayTime = 7000;
 
     player.enterNewScene(this, enterSceneText, displayTime);
   }
