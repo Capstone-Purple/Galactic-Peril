@@ -138,6 +138,11 @@ class Cafeteria extends Phaser.Scene {
         }
       }, this);
 
+    //new scene text and duration
+    let enterSceneText = "                                                     Great, the cafeteria! This looks like a good place to get something to eat.";
+    const displayTime = 7000;
+
+    player.enterNewScene(this, enterSceneText, displayTime);
     }
 
     update() {
