@@ -1,6 +1,27 @@
 const Phaser = require("phaser");
 const Inventory = require("./inventory.js").default;
 
+class TextBox {
+  constructor(scene, x, y) {
+    this.scene = scene;
+    this.x = x;
+    this.y = y;
+    this.textBox = scene.add.text(x, y, '', { fontFamily: 'Arial', fontSize: 20, color: '#ffffff' });
+    this.textBox.setOrigin(0.5, 1);
+    this.textBox.setDepth(1);
+    this.textBox.setVisible(false);
+  }
+
+  showText(text) {
+    this.textBox.setText(text);
+    this.textBox.setVisible(true);
+  }
+
+  hideText() {
+    this.textBox.setVisible(false);
+  }
+}
+
 class HealthBar {
   constructor(scene, x, y) {
     this.bar = new Phaser.GameObjects.Graphics(scene);
@@ -60,6 +81,9 @@ class Player {
 
     this.inventory = new Inventory(scene, 320, 530, 1, 3, 70);
 
+    this.textBox = new TextBox(scene, posX - 50, posY + 530);
+    this.textTimer = null;
+  
     const anims = scene.anims;
 
     anims.create({
@@ -133,6 +157,19 @@ class Player {
   acquireItem(itemKey) {
     console.log("In acquireItem function");
     this.inventory.addItem(itemKey);
+  }
+
+  enterNewScene(scene, text, displayTime) {
+    this.textBox.showText(text);
+
+    if (this.textTimer) {
+      clearTimeout(this.textTimer);
+    }
+
+    this.textTimer = setTimeout(() => {
+      this.textBox.hideText();
+      this.textTimer = null;
+    }, displayTime);
   }
 
   shootLaser() {
