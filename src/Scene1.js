@@ -21,7 +21,10 @@ class Scene1 extends Phaser.Scene {
     this.load.image("machinary1-tiles", "tilesets/SciFi_Computers_1.png");
     this.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
     this.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
-    this.load.image("door-tiles", "/tilesets/!$Objects_1.png");
+
+    this.load.image("door1-tiles", "/tilesets/!$Objects_1.png");
+    this.load.image("door2-tiles", "/tilesets/!$Objects_1.png");
+    this.load.image("blackscreen", "images/roundblackscreen.png")
     this.load.image("laser", "/weapons/Laser.png");
 
     this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
@@ -54,7 +57,9 @@ class Scene1 extends Phaser.Scene {
       "machinary2-tiles"
     );
     const screensTileset = map.addTilesetImage("screens", "screens-tiles");
-    const doorTileset = map.addTilesetImage("door", "door-tiles");
+    const door1Tileset = map.addTilesetImage("door", "door1-tiles");
+    const door2Tileset = map.addTilesetImage("door", "door2-tiles");
+
 
     map.createLayer("Background", backgroundTileset, 0, 0);
     map.createLayer("Ground", floorTileset, 0, 0);
@@ -67,16 +72,21 @@ class Scene1 extends Phaser.Scene {
       0
     );
 
-    const doorLayer = map.createLayer("Door", doorTileset, 0, 0);
+    const door1Layer = map.createLayer("Door1", door1Tileset, 0, 0);
+    const door2Layer = map.createLayer("Door2", door2Tileset, 0, 0);
+
 
     wallsLayer.setCollisionByProperty({ collides: true });
     machinaryAndScreensLayer.setCollisionByProperty({ collides: true });
-    doorLayer.setCollisionByProperty({ collides: true });
+    door1Layer.setCollisionByProperty({ collides: true });
+    door2Layer.setCollisionByProperty({ collides: false });
+
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
     player = new Player(this, 400, 300);
     this.registry.set("prevRoom", "Scene1");
+    player.inventory.display()
 
     this.physics.add.collider(player.sprite, [
       wallsLayer,
@@ -94,9 +104,51 @@ class Scene1 extends Phaser.Scene {
 
     this.physics.add.collider(
       player.sprite,
-      doorLayer,
+      door1Layer,
       function () {
-        this.scene.start("endingScene");
+        if (blackscreen.active === false) {
+          this.scene.start("endingScene");
+        } else {
+          let enterSceneText = this.add.text(player.sprite.x -200, player.sprite.y - 50, "Hmmmm... I wonder what these consoles can do...", {
+            fontFamily: "Arial",
+            font: "20px",
+            color: "black"})
+          // let enterSceneText = "Hmmmm... I wonder what these consoles can do...";
+          // const displayTime = 7000;
+          // player.enterNewScene(this, enterSceneText, displayTime);
+
+          setTimeout(() => {
+            enterSceneText.destroy()
+          }, 4000);
+
+        }
+      },
+      null,
+      this
+    );
+
+    this.physics.add.collider(
+      player.sprite,
+      door2Layer,
+      function () {
+        this.scene.start("Cafeteria");
+      },
+      null,
+      this
+    );
+    player.healthBar.bar.setDepth(1);
+    player.sprite.setDepth(1);
+    player.laser.setDepth(1);
+    platform = this.physics.add.staticGroup();
+    let blackscreen = platform.create(575,279,"blackscreen")
+    blackscreen.setScale(0.80).setDepth(0)
+    this.physics.add.overlap(
+      player.sprite,
+      blackscreen,
+      function () {
+        this.input.keyboard.on("keyup-SPACE", function() {
+          blackscreen.setActive(false).setVisible(false)
+        }, this);
       },
       null,
       this
@@ -118,11 +170,14 @@ class Scene1 extends Phaser.Scene {
       player.sprite,
       enemy.sprite,
       function () {
+        // console.log("player location => ", Math.floor(player.sprite.x), Math.floor(player.sprite.y))
+        // console.log("enemy location => ", Math.floor(enemy.sprite.x), Math.floor(enemy.sprite.y))
+
         // player.sprite.setTint(0xff0000);
         const damageAmount = 0.5;
         player.healthBar.decrease(damageAmount);
         if (player.healthBar.value === 0) {
-          let gameOver = this.add.text(500, 300, "Game Over", {
+          let gameOver = this.add.text(360, 240, "Game Over", {
             fontFamily: "Comic Sans MS",
             font: "20px Impact",
             color: "black",
@@ -139,9 +194,7 @@ class Scene1 extends Phaser.Scene {
               gameOver.setColor(`rgb(${c}, 0,0)`); //${c}, ${c})`);
             },
           });
-          player.sprite.body.setEnable(false); //try
           player.sprite.disableBody(true, true);
-          // player.sprite.setTexture('deadPlayer').setScale(.50)
           saveAndQuit.destroy();
           const restartBtn = this.add.text(300, 600, "Restart", {
             fontFamily: "Comic Sans MS",
@@ -162,42 +215,42 @@ class Scene1 extends Phaser.Scene {
       player.laser,
 
       function () {
-        player.laser.setActive(false);
-        player.laser.setVisible(false);
-        const damageAmount = 25;
-        enemy.healthBar.decrease(damageAmount);
+      player.laser.setActive(false);
+      player.laser.setVisible(false);
+      const damageAmount = 25;
+      enemy.healthBar.decrease(damageAmount);
 
-        if (enemy.healthBar.value === 0) {
-          enemy.sprite.body.setEnable(false);
-          enemy.sprite.disableBody(true, true);
-          enemy.healthBar.bar.setVisible(false);
-        }
+      if (enemy.healthBar.value === 0) {
+        enemy.sprite.body.setEnable(false);
+        enemy.sprite.disableBody(true, true);
+        enemy.healthBar.bar.setVisible(false);
+      }
       },
       null,
       this
     );
 
-    platform = this.physics.add.staticGroup();
-    let door = platform.create(0, 325, "door").setAlpha(50);
-    this.physics.add.collider(
-      player.sprite,
-      door,
-      function () {
-        this.scene.start("Cafeteria");
-      },
-      null,
-      this
-    );
+    // platform = this.physics.add.staticGroup();
+    // let door = platform.create(0, 325, "door").setAlpha(50);
+    // this.physics.add.collider(
+    //   player.sprite,
+    //   door,
+    //   function () {
+    //     this.scene.start("Cafeteria");
+    //   },
+    //   null,
+    //   this
+    // );
 
-    this.physics.add.collider(
-      player.sprite,
-      doorLayer,
-      function () {
-        this.scene.start("endingScene");
-      },
-      null,
-      this
-    );
+    // this.physics.add.collider(
+    //   player.sprite,
+    //   doorLayer,
+    //   function () {
+    //     this.scene.start("endingScene");
+    //   },
+    //   null,
+    //   this
+    // );
 
     const mainMenu = this.add.text(600, 600, "Main Menu", {
       fontFamily: "Comic Sans MS",

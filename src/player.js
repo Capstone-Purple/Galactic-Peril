@@ -113,13 +113,13 @@ class Player {
 
     this.sprite = scene.physics.add.sprite(posX, posY, "captain");
     this.cursors = scene.input.keyboard.createCursorKeys();
-
+    
     // creating laser sprite
-    this.laser = scene.physics.add.sprite(posX, posY, "laser");
+    this.laser = scene.physics.add.sprite(0, 0, "laser");
     this.laser.setVisible(false);
     this.laser.setActive(false);
   }
-
+  
   update() {
     const { cursors, sprite } = this;
     if (cursors.left.isDown) {

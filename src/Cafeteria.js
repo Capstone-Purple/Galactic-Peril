@@ -25,6 +25,7 @@ class Cafeteria extends Phaser.Scene {
       this.load.image("door2Tile", "tilesets/!$Objects_1.png");
       this.load.image("laser", "/weapons/Laser.png");
       this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
+      this.load.image("smallText", "/images/smalltext.png")
 
       this.load.tilemapTiledJSON(
         "cafeteriaScene",
@@ -81,6 +82,7 @@ class Cafeteria extends Phaser.Scene {
 
       player.sprite.setDepth(1)
       player.healthBar.bar.setDepth(10)
+      this.add.image(705,113, "smallText")
 
       platform = this.physics.add.staticGroup();
       vending1 = platform.create(570, 97, "vendingM");

@@ -104,24 +104,29 @@ class Enemy {
     const speed = 0.5;
     let velocityX = 0;
     let velocityY = 0;
-    const angle = Phaser.Math.Angle.Between(
-      enemy.x,
-      enemy.y,
-      player.x,
-      player.y
-    );
-    let distanceX = player.sprite.x - enemy.x;
-    let distanceY = player.sprite.y - enemy.y;
+    // const angle = Phaser.Math.Angle.Between(
+    //   enemy.x,
+    //   enemy.y,
+    //   player.x,
+    //   player.y
+    // );
+    let distanceX = Math.floor(player.sprite.x - enemy.x);
+    let distanceY = Math.floor(player.sprite.y - enemy.y);
 
     if (
-      (Math.abs(distanceX) < 200 && Math.abs(distanceX) > 80) ||
-      (Math.abs(distanceY) < 200 && Math.abs(distanceY) > 80)
+      (Math.abs(distanceX) < 400 && Math.abs(distanceX) > 90) ||
+      (Math.abs(distanceY) < 400 && Math.abs(distanceY) > 90)
     ) {
-      velocityX = (player.sprite.x - enemy.x) * speed;
-      velocityY = (player.sprite.y - enemy.y) * speed;
+      velocityX = Math.floor(player.sprite.x - enemy.x) * speed;
+      velocityY = Math.floor(player.sprite.y - enemy.y) * speed;
 
       enemy.setVelocityX(velocityX); 
       enemy.setVelocityY(velocityY);
+    } else {
+      velocityX = 0;
+      velocityY = 0;
+      enemy.setVelocityX(velocityX)
+      enemy.setVelocityY(velocityY)
     }
     return [velocityX, velocityY];
   }
