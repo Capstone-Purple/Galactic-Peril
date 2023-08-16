@@ -1,6 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
-const {placeMenus} = require("./boilerplate.js").default;
+const {placeMenus, loadAssets} = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -11,6 +11,7 @@ class endingScene extends Phaser.Scene {
   }
 
   preload() {
+    loadAssets(this);
     this.load.tilemapTiledJSON(
       "endSceneShip",
       "tilesets/Starship-Map-Ending-Scene.json"

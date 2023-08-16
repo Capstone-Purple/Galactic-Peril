@@ -13,6 +13,8 @@ class Cafeteria extends Phaser.Scene {
 
     preload() {
       loadAssets(this);
+      this.load.image("floorTiles", "tilesets/A5_SciFi.png");
+      this.load.image("wallTiles", "tilesets/A4_SciFi.png");
       this.load.tilemapTiledJSON(
         "cafeteriaScene",
         "tilesets/cafeteriaScene.json"
@@ -26,8 +28,8 @@ class Cafeteria extends Phaser.Scene {
         "background-tiles"
       );
 
-      const floorTileSet = map.addTilesetImage('floor', 'floor-tiles');
-      const wallTileSet = map.addTilesetImage('wall', 'wall-tiles');
+      const floorTileSet = map.addTilesetImage('floor', 'floorTiles');
+      const wallTileSet = map.addTilesetImage('wall', 'wallTiles');
       const furnitureTileSet = map.addTilesetImage('furniture', 'furnitureTiles');
       const door1TileSet = map.addTilesetImage('door', 'door1Tile');
       const door2TileSet = map.addTilesetImage('door', 'door2Tile');

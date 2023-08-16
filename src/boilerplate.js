@@ -40,9 +40,14 @@ function loadAssets(scene) {
     scene.load.image("background-tiles", "tilesets/Starfield_1.png");
     scene.load.image("floor-tiles", "tilesets/A5_SciFi.png");
     scene.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
+    scene.load.image("door1-tiles", "/tilesets/!$Objects_1.png");
+    scene.load.image("door2-tiles", "/tilesets/!$Objects_1.png");
+    scene.load.image("door-tiles", "tilesets/!$Objects_1.png");
+    scene.load.image("door-frame-tiles", "tilesets/SciFi_Deco_4.png");
 
     scene.load.image("machinary1-tiles", "tilesets/SciFi_Computers_1.png");
     scene.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
+    scene.load.image("blackscreen", "images/roundblackscreen.png");
 
     scene.load.image("medical1-tiles", "tilesets/SciFi_Medical.png");
     scene.load.image("medical2-tiles", "tilesets/SciFi_Deco_1.png");
