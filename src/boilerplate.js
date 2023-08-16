@@ -44,8 +44,15 @@ function loadAssets(scene) {
     scene.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
     scene.load.image("medical1-tiles", "tilesets/SciFi_Medical.png");
     scene.load.image("medical2-tiles", "tilesets/SciFi_Deco_1.png");
-    scene.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
+    scene.load.image("vendingM", "/images/vendingmachine.png");
+    scene.load.image("plate1", "/images/plate1.png")
+    scene.load.image("plate2", "/images/plate2.png")
+    scene.load.image("furnitureTiles", "tilesets/SciFi_Deco_3.png");
     scene.load.image("door-tiles", "/tilesets/!$Objects_1.png");
+    scene.load.image("door1Tile", "tilesets/!$Objects_1.png");
+    scene.load.image("door2Tile", "tilesets/!$Objects_1.png");
+    scene.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
+    scene.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");
     scene.load.image("laser", "/weapons/Laser.png");
     scene.load.image("pistol", "/images/alienPistol.png");
     scene.load.image("empty-inv", "/images/inventoryIcon.png");

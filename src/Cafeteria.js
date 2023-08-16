@@ -1,7 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
-const placeMenus = require("./boilerplate.js").default;
-
+const {placeMenus, loadAssets} = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -13,28 +12,24 @@ class Cafeteria extends Phaser.Scene {
     }
 
     preload() {
-      this.load.image("empty-inv", "/images/inventoryIcon.png");
-      this.load.image("vendingM", "/images/vendingmachine.png");
-      this.load.image("plate1", "/images/plate1.png")
-      this.load.image("plate2", "/images/plate2.png")
-      this.load.image("background-tiles", "tilesets/Starfield_1.png");
+      loadAssets(this);
+      // this.load.image("vendingM", "/images/vendingmachine.png");
+      // this.load.image("plate1", "/images/plate1.png")
+      // this.load.image("plate2", "/images/plate2.png")
+      // this.load.image("background-tiles", "tilesets/Starfield_1.png");
       this.load.image("floorTiles", "tilesets/A5_SciFi.png");
       this.load.image("wallTiles", "tilesets/A4_SciFi.png");
-      this.load.image("furnitureTiles", "tilesets/SciFi_Deco_3.png");
-      this.load.image("door1Tile", "tilesets/!$Objects_1.png");
-      this.load.image("door2Tile", "tilesets/!$Objects_1.png");
-      this.load.image("laser", "/weapons/Laser.png");
-      this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
-      this.load.image("smallText", "/images/smalltext.png")
-
+      // this.load.image("furnitureTiles", "tilesets/SciFi_Deco_3.png");
+      // this.load.image("door1Tile", "tilesets/!$Objects_1.png");
+      // this.load.image("door2Tile", "tilesets/!$Objects_1.png");
       this.load.tilemapTiledJSON(
         "cafeteriaScene",
         "tilesets/cafeteriaScene.json"
       );
-      this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
-        frameWidth: 80,
-        frameHeight: 80,
-      });
+      // this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
+      //   frameWidth: 80,
+      //   frameHeight: 80,
+      // });
     }
 
     create() {
@@ -147,6 +142,43 @@ class Cafeteria extends Phaser.Scene {
     const displayTime = 7000;
 
     player.enterNewScene(this, enterSceneText, displayTime);
+      this.input.keyboard.on("keyup-ENTER", function() {
+        if (collision) {
+          plate1.destroy();
+          // plate1.setVisible(true);
+          collision = false;
+          setTimeout(() => {
+            // plate1.setVisible(false);
+            plate1 = platform.create(660, 85, "plate1")
+            this.physics.add.overlap(player.sprite, plate1, function() {
+              collision = true;
+            }, null, this);
+          }, 3000);
+        }
+      }, this);
+
+      plate2 = platform.create(752, 80, "plate2")
+      // plate2.setVisible(false)
+      this.physics.add.overlap(player.sprite, plate2, function() {
+        collision = true;
+      }, null, this);
+
+      this.input.keyboard.on("keyup-ENTER", function() {
+        if (collision) {
+          // plate2.setVisible(true);
+          player.acquireItem(plate2.texture.key);
+          plate2.destroy()
+          collision = false;
+          setTimeout(() => {
+            // plate2.setVisible(false)
+            plate2 = platform.create(752, 80, "plate2")
+            this.physics.add.overlap(player.sprite, plate2, function() {
+              collision = true;
+            }, null, this);
+          }, 3000);
+        }
+      }, this);
+      placeMenus(this);
     }
 
     update() {
