@@ -29,11 +29,16 @@ class Inventory {
     }
 
     //updates the inventory slot with a new item
-    addItem(itemTextureKey) {
-        console.log(itemTextureKey);
+    addItem(key) {
+        console.log(key);
         const firstEmpty = this.slots.findIndex((slot) => slot === "empty-inv");
-        this.slots[firstEmpty] = itemTextureKey;
+        this.slots[firstEmpty] = key;
         this.display();
+    }
+
+    // Check to see if the player is holding a specific item
+    checkForItem(key) {
+        return this.slots.includes(key);
     }
 }
 

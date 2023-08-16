@@ -1,6 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
-const placeMenus = require("./boilerplate.js").default;
+const {loadAssets, placeMenus} = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -14,21 +14,11 @@ class beginningScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("background-tiles", "tilesets/Starfield_1.png");
-    this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
-    this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
-    this.load.image("medical1-tiles", "tilesets/SciFi_Medical.png");
-    this.load.image("medical2-tiles", "tilesets/SciFi_Deco_1.png");
+    loadAssets(this);
     this.load.tilemapTiledJSON(
       "beginningSceneShip",
       "tilesets/Starship-Map-Beginning-Scene.json"
     );
-    this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
-      frameWidth: 80,
-      frameHeight: 80,
-    });
-    this.load.audio("background-music", ["music/background-music.mp3"]);
-    this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
   }
 
   create() {
