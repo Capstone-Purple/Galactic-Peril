@@ -17,19 +17,7 @@ class Arena extends Phaser.Scene {
 
     preload() {
         loadAssets(this);
-        // this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
-        // this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
         this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
-        // this.load.image("pistol", "/images/alienPistol.png");
-        // this.load.image("empty-inv", "/images/inventoryIcon.png");
-        // this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
-        //     frameWidth: 80,
-        //     frameHeight: 80,
-        // });
-        // this.load.spritesheet("alien", "/images/Alien1.png", {
-        //     frameWidth: 100,
-        //     frameHeight: 100,
-        // });
     }
 
     create() {

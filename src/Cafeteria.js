@@ -13,23 +13,10 @@ class Cafeteria extends Phaser.Scene {
 
     preload() {
       loadAssets(this);
-      // this.load.image("vendingM", "/images/vendingmachine.png");
-      // this.load.image("plate1", "/images/plate1.png")
-      // this.load.image("plate2", "/images/plate2.png")
-      // this.load.image("background-tiles", "tilesets/Starfield_1.png");
-      this.load.image("floorTiles", "tilesets/A5_SciFi.png");
-      this.load.image("wallTiles", "tilesets/A4_SciFi.png");
-      // this.load.image("furnitureTiles", "tilesets/SciFi_Deco_3.png");
-      // this.load.image("door1Tile", "tilesets/!$Objects_1.png");
-      // this.load.image("door2Tile", "tilesets/!$Objects_1.png");
       this.load.tilemapTiledJSON(
         "cafeteriaScene",
         "tilesets/cafeteriaScene.json"
       );
-      // this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
-      //   frameWidth: 80,
-      //   frameHeight: 80,
-      // });
     }
 
     create() {
@@ -39,8 +26,8 @@ class Cafeteria extends Phaser.Scene {
         "background-tiles"
       );
 
-      const floorTileSet = map.addTilesetImage('floor', 'floorTiles');
-      const wallTileSet = map.addTilesetImage('wall', 'wallTiles');
+      const floorTileSet = map.addTilesetImage('floor', 'floor-tiles');
+      const wallTileSet = map.addTilesetImage('wall', 'wall-tiles');
       const furnitureTileSet = map.addTilesetImage('furniture', 'furnitureTiles');
       const door1TileSet = map.addTilesetImage('door', 'door1Tile');
       const door2TileSet = map.addTilesetImage('door', 'door2Tile');
