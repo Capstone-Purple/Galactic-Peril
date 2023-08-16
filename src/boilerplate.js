@@ -36,4 +36,52 @@ function placeMenus(scene, player, enemy = null) {
     });
 }
 
-export default placeMenus;
+function loadAssets(scene) {
+    scene.load.image("background-tiles", "tilesets/Starfield_1.png");
+    scene.load.image("floor-tiles", "tilesets/A5_SciFi.png");
+    scene.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
+    scene.load.image("door1-tiles", "/tilesets/!$Objects_1.png");
+    scene.load.image("door2-tiles", "/tilesets/!$Objects_1.png");
+    scene.load.image("door-tiles", "tilesets/!$Objects_1.png");
+    scene.load.image("door-frame-tiles", "tilesets/SciFi_Deco_4.png");
+
+    scene.load.image("machinary1-tiles", "tilesets/SciFi_Computers_1.png");
+    scene.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
+    scene.load.image("blackscreen", "images/roundblackscreen.png");
+
+    scene.load.image("medical1-tiles", "tilesets/SciFi_Medical.png");
+    scene.load.image("medical2-tiles", "tilesets/SciFi_Deco_1.png");
+
+    scene.load.image("vendingM", "/images/vendingmachine.png");
+    scene.load.image("plate1", "/images/plate1.png");
+    scene.load.image("plate2", "/images/plate2.png");
+    scene.load.image("smallText", "/images/smalltext.png");
+
+    scene.load.image("furnitureTiles", "tilesets/SciFi_Deco_3.png");
+
+    scene.load.image("door-tiles", "/tilesets/!$Objects_1.png");
+    scene.load.image("door1Tile", "tilesets/!$Objects_1.png");
+    scene.load.image("door2Tile", "tilesets/!$Objects_1.png");
+
+    scene.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
+    scene.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");
+
+    scene.load.image("laser", "/weapons/Laser.png");
+    scene.load.image("pistol", "/images/alienPistol.png");
+    scene.load.image("empty-inv", "/images/inventoryIcon.png");
+
+    scene.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
+      frameWidth: 80,
+      frameHeight: 80,
+    });
+
+    scene.load.spritesheet("alien", "/images/Alien1.png", {
+      frameWidth: 100,
+      frameHeight: 100,
+    });
+    
+    scene.load.audio("background-music", ["music/background-music.mp3"]);
+    scene.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
+}
+
+export default {loadAssets, placeMenus};

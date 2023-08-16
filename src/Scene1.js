@@ -1,7 +1,7 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
 const Enemy = require("./enemy.js").default;
-const placeMenus = require ("./boilerplate.js").default;
+const {loadAssets, placeMenus} = require ("./boilerplate.js").default;
 const TextBox = require("./player.js").default;
 
 let player;
@@ -15,29 +15,8 @@ class Scene1 extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("background-tiles", "tilesets/Starfield_1.png");
-    this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
-    this.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
-    this.load.image("machinary1-tiles", "tilesets/SciFi_Computers_1.png");
-    this.load.image("machinary2-tiles", "tilesets/SciFi_Computers_2.png");
-    this.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
-
-    this.load.image("door1-tiles", "/tilesets/!$Objects_1.png");
-    this.load.image("door2-tiles", "/tilesets/!$Objects_1.png");
-    this.load.image("blackscreen", "images/roundblackscreen.png")
-    this.load.image("laser", "/weapons/Laser.png");
-
+    loadAssets(this);
     this.load.tilemapTiledJSON("starship", "tilesets/Starship-Map.json");
-    this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
-      frameWidth: 80,
-      frameHeight: 80,
-    });
-    this.load.spritesheet("alien", "/images/Alien1.png", {
-      frameWidth: 100,
-      frameHeight: 100,
-    });
-
-    this.load.audio("laser-sound", ["/music/laser-sound.mp3"]);
   }
 
   create() {

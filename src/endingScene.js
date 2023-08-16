@@ -1,6 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
-const placeMenus = require("./boilerplate.js").default;
+const {placeMenus, loadAssets} = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -11,19 +11,11 @@ class endingScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("background-tiles", "tilesets/Starfield_1.png");
-    this.load.image("floor-tiles", "tilesets/A5_SciFi.png");
-    this.load.image("door-tiles", "tilesets/!$Objects_1.png");
-    this.load.image("door-frame-tiles", "tilesets/SciFi_Deco_4.png");
-    this.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");
+    loadAssets(this);
     this.load.tilemapTiledJSON(
       "endSceneShip",
       "tilesets/Starship-Map-Ending-Scene.json"
     );
-    this.load.spritesheet("captain", "/images/YappinToTheCaptain.png", {
-      frameWidth: 80,
-      frameHeight: 80,
-    });
   }
 
   create() {
