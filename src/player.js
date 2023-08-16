@@ -142,7 +142,9 @@ class Player {
 
     // check for space bar input to shoot
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
-      this.shootLaser();
+      if(this.sprite.anims.currentAnim) {
+        this.shootLaser();
+      }
     }
 
     //health connected to top of player

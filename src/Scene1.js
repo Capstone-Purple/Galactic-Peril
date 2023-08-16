@@ -125,7 +125,7 @@ class Scene1 extends Phaser.Scene {
       player.sprite,
       blackscreen,
       function () {
-        this.input.keyboard.on("keyup-SPACE", function() {
+        this.input.keyboard.on("keyup-SHIFT", function() {
           blackscreen.setActive(false).setVisible(false)
         }, this);
       },

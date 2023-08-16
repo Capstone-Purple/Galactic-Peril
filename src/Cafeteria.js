@@ -86,7 +86,7 @@ class Cafeteria extends Phaser.Scene {
         collision = plate2;
       }, null, this);
 
-      this.input.keyboard.on("keyup-SPACE", function() {
+      this.input.keyboard.on("keyup-SHIFT", function() {
         if (collision) {
           if (collision === vending1) {
             player.acquireItem(collision.texture.key);
@@ -124,49 +124,13 @@ class Cafeteria extends Phaser.Scene {
         }
       }, this);
 
-    placeMenus(this, player);
+      placeMenus(this, player);
 
-    //new scene text and duration
-    let enterSceneText = "                                                     Great, the cafeteria! This looks like a good place to get something to eat.";
-    const displayTime = 7000;
+      //new scene text and duration
+      let enterSceneText = "                                                     Great, the cafeteria! This looks like a good place to get something to eat.";
+      const displayTime = 7000;
 
-    player.enterNewScene(this, enterSceneText, displayTime);
-      this.input.keyboard.on("keyup-ENTER", function() {
-        if (collision) {
-          plate1.destroy();
-          // plate1.setVisible(true);
-          collision = false;
-          setTimeout(() => {
-            // plate1.setVisible(false);
-            plate1 = platform.create(660, 85, "plate1")
-            this.physics.add.overlap(player.sprite, plate1, function() {
-              collision = true;
-            }, null, this);
-          }, 3000);
-        }
-      }, this);
-
-      plate2 = platform.create(752, 80, "plate2")
-      // plate2.setVisible(false)
-      this.physics.add.overlap(player.sprite, plate2, function() {
-        collision = true;
-      }, null, this);
-
-      this.input.keyboard.on("keyup-ENTER", function() {
-        if (collision) {
-          // plate2.setVisible(true);
-          player.acquireItem(plate2.texture.key);
-          plate2.destroy()
-          collision = false;
-          setTimeout(() => {
-            // plate2.setVisible(false)
-            plate2 = platform.create(752, 80, "plate2")
-            this.physics.add.overlap(player.sprite, plate2, function() {
-              collision = true;
-            }, null, this);
-          }, 3000);
-        }
-      }, this);
+      player.enterNewScene(this, enterSceneText, displayTime);
       placeMenus(this);
     }
 
