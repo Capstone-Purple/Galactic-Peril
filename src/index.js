@@ -10,6 +10,7 @@ const sceneArr = [
   endingSpaceShip,
   Arena,
   Cafeteria,
+  armoryScene,
 ];
 
 const path = window.location.pathname;
@@ -28,6 +29,7 @@ import endingScene from "./endingScene";
 import Arena from "./scenes/Arena.js";
 import Cafeteria from "./Cafeteria";
 import endingSpaceShip from "./endingSpaceShipScene";
+import armoryScene from "./armoryScene";
 
 let config = {
   type: Phaser.AUTO,
