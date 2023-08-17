@@ -80,7 +80,8 @@ class Scene1 extends Phaser.Scene {
       let hBar = JSON.parse(loadHealth);
       player.healthBar.value = hBar;
     }
-
+    
+    let textcount = 0;
     this.physics.add.collider(
       player.sprite,
       door1Layer,
@@ -88,17 +89,14 @@ class Scene1 extends Phaser.Scene {
         if (blackscreen.active === false) {
           this.scene.start("endingScene");
         } else {
-          let enterSceneText = this.add.text(player.sprite.x -200, player.sprite.y + 270, "Locked! Hmmmm... I wonder what these consoles can do...", {
-            fontFamily: "Arial",
-            font: "20px",
-            color: "white"})
-          // let enterSceneText = "Hmmmm... I wonder what these consoles can do...";
-          // const displayTime = 7000;
-          // player.enterNewScene(this, enterSceneText, displayTime);
-
-          setTimeout(() => {
-            enterSceneText.destroy()
-          }, 4000);
+          if(textcount === 0) {
+            textcount++;
+            let lockedDoorText = "Locked! Hmmmm... I wonder what these consoles can do..."
+            player.enterNewScene(this, lockedDoorText, displayTime);
+            setTimeout(() => {
+              textcount--;
+            }, 4000);
+          }
 
         }
       },
@@ -121,17 +119,20 @@ class Scene1 extends Phaser.Scene {
     platform = this.physics.add.staticGroup();
     let blackscreen = platform.create(575,279,"blackscreen")
     blackscreen.setScale(0.80).setDepth(0)
-    this.physics.add.overlap(
-      player.sprite,
-      blackscreen,
-      function () {
-        this.input.keyboard.on("keyup-SPACE", function() {
+    let collision;
+    this.physics.add.overlap(player.sprite, blackscreen, function () {
+      collision = blackscreen;
+      setTimeout(() => {
+        collision = null;
+      }, 100);
+    }, null, this);
+    this.input.keyboard.on("keyup-SHIFT", function() {
+      if (collision) {
+        if (collision === blackscreen) {
           blackscreen.setActive(false).setVisible(false)
-        }, this);
-      },
-      null,
-      this
-    );
+        }
+      }
+    }, this);
 
     enemy = new Enemy(this, 800, 300);
     enemy.sprite.setImmovable(true);
