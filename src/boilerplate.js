@@ -86,7 +86,7 @@ function loadAssets(scene) {
   scene.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");
 
   scene.load.image("laser", "/weapons/Laser.png");
-  scene.load.image("pistol", "/images/alienPistol.png");
+  scene.load.image("pistol", "/images/pistol.png");
   scene.load.image("empty-inv", "/images/inventoryIcon.png");
 
   scene.load.image("armory-tiles", "tilesets/Armory.png");
