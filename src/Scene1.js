@@ -88,10 +88,10 @@ class Scene1 extends Phaser.Scene {
         if (blackscreen.active === false) {
           this.scene.start("endingScene");
         } else {
-          let enterSceneText = this.add.text(player.sprite.x -200, player.sprite.y - 50, "Hmmmm... I wonder what these consoles can do...", {
+          let enterSceneText = this.add.text(player.sprite.x -200, player.sprite.y + 270, "Locked! Hmmmm... I wonder what these consoles can do...", {
             fontFamily: "Arial",
             font: "20px",
-            color: "black"})
+            color: "white"})
           // let enterSceneText = "Hmmmm... I wonder what these consoles can do...";
           // const displayTime = 7000;
           // player.enterNewScene(this, enterSceneText, displayTime);
