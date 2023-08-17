@@ -57,26 +57,28 @@ class armoryScene extends Phaser.Scene {
       },
       null,
       this
-      );
+    );
       
-    let pistol = platform.create(734,122,"pistol");
-    player.healthBar.bar.setVisible(false)
-    let collision;
-    this.physics.add.overlap(player.sprite, pistol, function () {
-      collision = pistol;
-      setTimeout(() => {
-        collision = null;
-      }, 100);
-    }, null, this);
-    this.input.keyboard.on("keyup-SHIFT", function() {
-      if (collision) {
-        if (collision === pistol) {
-          player.acquireItem(collision.texture.key);
-          pistol.setActive(false).setVisible(false)
+    if (!player.inventory.checkForItem("pistol")) {
+      let pistol = platform.create(734,122,"pistol");
+      player.healthBar.bar.setVisible(false)
+      let collision;
+      this.physics.add.overlap(player.sprite, pistol, function () {
+        collision = pistol;
+        setTimeout(() => {
+          collision = null;
+        }, 100);
+      }, null, this);
+      this.input.keyboard.on("keyup-SHIFT", function() {
+        if (collision) {
+          if (collision === pistol) {
+            player.acquireItem(collision.texture.key);
+            pistol.setActive(false).setVisible(false)
+          }
         }
-      }
-    }, this);
-
+      }, this);
+    }
+      
     player.inventory.display();
 
     this.physics.add.collider(player.sprite, [

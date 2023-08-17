@@ -146,13 +146,14 @@ class Player {
 
     // check for space bar input to shoot
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
-      this.shootLaser();
       if (this.inventory.checkForItem("pistol")) {
         this.shootLaser();
       } else {
-        let weaponText =
-          "                                               There should be an armory somewhere on this ship... Hopefully...";
+        let weaponText = "                                                   There should be an armory somewhere on this ship... Hopefully...";
         this.textBox.showText(weaponText);
+        setTimeout(() => {
+          this.textBox.hideText();
+        }, 7000);
       }
     }
 
