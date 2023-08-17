@@ -29,11 +29,12 @@ function placeMenus(scene, player, enemy = null) {
     }
     localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
 
-    //SAVE PLAYER INVENTORY
-    //WILL ITEMS COLLECTED REMAIN COLLECTED??
-    // console.log(player)
-    scene.scene.start("MainMenu");
-  });
+        //SAVE PLAYER INVENTORY
+        //WILL ITEMS COLLECTED REMAIN COLLECTED??
+        // console.log(player)
+        scene.scene.start("MainMenu");
+    });
+    return saveAndQuit;
 }
 
 function loadAssets(scene) {

@@ -124,8 +124,6 @@ class Cafeteria extends Phaser.Scene {
         }
       }, this);
 
-    placeMenus(this, player);
-
     //new scene text and duration
     let enterSceneText = "                                                     Great, the cafeteria! This looks like a good place to get something to eat.";
     const displayTime = 7000;
@@ -167,7 +165,7 @@ class Cafeteria extends Phaser.Scene {
           }, 3000);
         }
       }, this);
-      placeMenus(this);
+      placeMenus(this, player);
     }
 
     update() {
