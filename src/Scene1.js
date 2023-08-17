@@ -145,6 +145,8 @@ class Scene1 extends Phaser.Scene {
       enemy.sprite.setPosition(location.x, location.y);
     }
 
+    let saveAndQuit = placeMenus(this, player, enemy);
+
     this.physics.add.collider(
       player.sprite,
       enemy.sprite,
@@ -209,65 +211,11 @@ class Scene1 extends Phaser.Scene {
       this
     );
 
-    // platform = this.physics.add.staticGroup();
-    // let door = platform.create(0, 325, "door").setAlpha(50);
-    // this.physics.add.collider(
-    //   player.sprite,
-    //   door,
-    //   function () {
-    //     this.scene.start("Cafeteria");
-    //   },
-    //   null,
-    //   this
-    // );
-
-    // this.physics.add.collider(
-    //   player.sprite,
-    //   doorLayer,
-    //   function () {
-    //     this.scene.start("endingScene");
-    //   },
-    //   null,
-    //   this
-    // );
-
-    const mainMenu = this.add.text(600, 600, "Main Menu", {
-      fontFamily: "Comic Sans MS",
-      font: "30px Impact",
-    });
-    mainMenu.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
-      this.scene.start("MainMenu");
-    });
-
-    const saveAndQuit = this.add.text(300, 600, "Save & Quit", {
-      fontFamily: "Comic Sans MS",
-      font: "30px Impact",
-    });
-    saveAndQuit.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
-      localStorage.setItem("scene", this.scene.key);
-      localStorage.setItem(
-        "player",
-        JSON.stringify({ x: player.sprite.x, y: player.sprite.y })
-      );
-      localStorage.setItem(
-        "enemy",
-        JSON.stringify({ x: enemy.sprite.x, y: enemy.sprite.y })
-      );
-      localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
-
-      //SAVE PLAYER INVENTORY
-      //WILL ITEMS COLLECTED REMAIN COLLECTED??
-      // console.log(player)
-      this.scene.start("MainMenu");
-    });
-
     //new scene text and duration
     let enterSceneText = "Hold on, what... who are you? This isn't exactly how I imagined my day going.";
     const displayTime = 7000;
 
     player.enterNewScene(this, enterSceneText, displayTime);
-    
-    placeMenus(this, player, enemy);
   }
 
   update() {

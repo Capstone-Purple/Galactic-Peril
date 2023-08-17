@@ -34,6 +34,7 @@ function placeMenus(scene, player, enemy = null) {
         // console.log(player)
         scene.scene.start("MainMenu");
     });
+    return saveAndQuit;
 }
 
 function loadAssets(scene) {
