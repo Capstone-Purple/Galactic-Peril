@@ -2,6 +2,7 @@ const Phaser = require("phaser");
 
 let myTitle;
 let fx;
+let instructions;
 
 class MainMenu extends Phaser.Scene {
   constructor() {
@@ -61,6 +62,10 @@ class MainMenu extends Phaser.Scene {
         fontFamily: "Comic Sans MS",
         font: "30px Impact",
       });
+      instructions = this.add.text(225, 670, "Instructions: Arrow Keys to move, Spacebar to interact with objects", {
+        fontFamily: "Comic Sans MS",
+        font: "25px Impact",
+      });
       startBtn.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
         localStorage.clear();
         this.scene.start("beginningScene");
@@ -74,7 +79,6 @@ class MainMenu extends Phaser.Scene {
         localStorage.clear();
         this.scene.start("beginningScene");
       });
-
       const continueBtn = this.add.text(400, 400, "Continue Game", {
         fontFamily: "Comic Sans MS",
         font: "30px Impact",
