@@ -33,6 +33,7 @@ class Cafeteria extends Phaser.Scene {
       const furnitureTileSet = map.addTilesetImage('furniture', 'furnitureTiles');
       const door1TileSet = map.addTilesetImage('door', 'door1Tile');
       const door2TileSet = map.addTilesetImage('door', 'door2Tile');
+      const door3TileSet = map.addTilesetImage('door', 'door3Tile');
 
       map.createLayer("Background", backgroundTileset, 0, 0);
       
@@ -41,11 +42,13 @@ class Cafeteria extends Phaser.Scene {
       const furnitureLayer = map.createLayer("Furniture", furnitureTileSet, 0, 0);
       const door1Layer = map.createLayer("Door1", door1TileSet, 0, 0);
       const door2Layer = map.createLayer("Door2", door2TileSet, 0, 0);
+      const door3Layer = map.createLayer("Door3", door3TileSet, 0, 0);
 
       wallLayer.setCollisionByProperty({ collides: true });
       furnitureLayer.setCollisionByProperty({ collides: true });
       door1Layer.setCollisionByProperty({ collides: true });
       door2Layer.setCollisionByProperty({ collides: true });
+      door3Layer.setCollisionByProperty({ collides: true });
 
 
       
@@ -62,6 +65,10 @@ class Cafeteria extends Phaser.Scene {
 
       this.physics.add.collider(player.sprite,door2Layer, function () {
         this.scene.start("Scene1")
+      },null,this);
+
+      this.physics.add.collider(player.sprite,door3Layer, function () {
+        this.scene.start("armoryScene")
       },null,this);
 
       player.sprite.setDepth(1)
