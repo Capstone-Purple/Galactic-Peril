@@ -6,7 +6,11 @@ class TextBox {
     this.scene = scene;
     this.x = x;
     this.y = y;
-    this.textBox = scene.add.text(x, y, '', { fontFamily: 'Arial', fontSize: 20, color: '#ffffff' });
+    this.textBox = scene.add.text(x, y, "", {
+      fontFamily: "Arial",
+      fontSize: 20,
+      color: "#ffffff",
+    });
     this.textBox.setOrigin(0.5, 1);
     this.textBox.setDepth(1);
     this.textBox.setVisible(false);
@@ -83,7 +87,7 @@ class Player {
 
     this.textBox = new TextBox(scene, posX - 50, posY + 530);
     this.textTimer = null;
-  
+
     const anims = scene.anims;
 
     anims.create({
