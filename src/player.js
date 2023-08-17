@@ -117,13 +117,13 @@ class Player {
 
     this.sprite = scene.physics.add.sprite(posX, posY, "captain");
     this.cursors = scene.input.keyboard.createCursorKeys();
-    
+
     // creating laser sprite
     this.laser = scene.physics.add.sprite(0, 0, "laser");
     this.laser.setVisible(false);
     this.laser.setActive(false);
   }
-  
+
   update() {
     const { cursors, sprite } = this;
     if (cursors.left.isDown) {
@@ -146,11 +146,13 @@ class Player {
 
     // check for space bar input to shoot
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
-      if(this.inventory.checkForItem('pistol')) {
+      this.shootLaser();
+      if (this.inventory.checkForItem("pistol")) {
         this.shootLaser();
-      } else { 
-        let weaponText = "                                               There should be an armory somewhere on this ship... Hopefully..."
-        this.textBox.showText(weaponText)
+      } else {
+        let weaponText =
+          "                                               There should be an armory somewhere on this ship... Hopefully...";
+        this.textBox.showText(weaponText);
       }
     }
 

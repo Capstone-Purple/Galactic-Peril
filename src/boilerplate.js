@@ -34,6 +34,23 @@ function placeMenus(scene, player, enemy = null) {
         // console.log(player)
         scene.scene.start("MainMenu");
     });
+
+    const musicPlaying = scene.registry.get("musicPlaying");
+    if (!musicPlaying) {
+        scene.music = scene.sound.add("background-music");
+        const musicConfig = {
+          mute: false,
+          volume: 0.3,
+          rate: 1,
+          detune: 0,
+          seek: 0,
+          loop: true,
+          delay: 0,
+        };
+        scene.music.play(musicConfig);
+        scene.registry.set("musicPlaying", true);
+      }
+
     return saveAndQuit;
 }
 
