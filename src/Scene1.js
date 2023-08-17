@@ -206,12 +206,20 @@ class Scene1 extends Phaser.Scene {
         enemy.sprite.body.setEnable(false);
         enemy.sprite.disableBody(true, true);
         enemy.healthBar.bar.setVisible(false);
+        this.registry.set("aliendDefeated", true);
       }
       },
       null,
       this
     );
-
+    
+    const alienDefeated = this.registry.get("aliendDefeated");
+    if (alienDefeated) {
+      enemy.sprite.body.setEnable(false);
+      enemy.sprite.disableBody(true, true);
+      enemy.healthBar.bar.setVisible(false);
+    }
+    
     //new scene text and duration
     let enterSceneText = "Hold on, what... who are you? This isn't exactly how I imagined my day going.";
     const displayTime = 7000;
