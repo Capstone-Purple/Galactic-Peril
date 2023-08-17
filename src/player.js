@@ -146,6 +146,7 @@ class Player {
 
     // check for space bar input to shoot
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
+      this.shootLaser();
       if (this.inventory.checkForItem("pistol")) {
         this.shootLaser();
       } else {
@@ -214,10 +215,6 @@ class Player {
     this.laser.setVelocity(velocityX, velocityY);
     this.laser.setVisible(true);
     this.laser.setActive(true);
-
-    this.scene.time.delayedCall(1250, () => {
-      this.laser.destroy();
-    });
   }
 }
 
