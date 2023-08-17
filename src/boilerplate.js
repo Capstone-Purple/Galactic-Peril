@@ -63,6 +63,7 @@ function loadAssets(scene) {
   scene.load.image("door-tiles", "/tilesets/!$Objects_1.png");
   scene.load.image("door1Tile", "tilesets/!$Objects_1.png");
   scene.load.image("door2Tile", "tilesets/!$Objects_1.png");
+  scene.load.image("door3Tile", "tilesets/!$Objects_1.png");
 
   scene.load.image("screens-tiles", "tilesets/!$ViewScreen_7.png");
   scene.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");

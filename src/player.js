@@ -146,7 +146,12 @@ class Player {
 
     // check for space bar input to shoot
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
-      this.shootLaser();
+      if(this.inventory.checkForItem('pistol')) {
+        this.shootLaser();
+      } else { 
+        let weaponText = "                                               There should be an armory somewhere on this ship... Hopefully..."
+        this.textBox.showText(weaponText)
+      }
     }
 
     //health connected to top of player
@@ -192,14 +197,16 @@ class Player {
     let velocityX = 0;
     let velocityY = 0;
 
-    if (this.sprite.anims.currentAnim.key === "left") {
-      velocityX = -laserSpeed;
-    } else if (this.sprite.anims.currentAnim.key === "right") {
-      velocityX = laserSpeed;
-    } else if (this.sprite.anims.currentAnim.key === "up") {
-      velocityY = -laserSpeed;
-    } else if (this.sprite.anims.currentAnim.key === "down") {
-      velocityY = laserSpeed;
+    if (this.sprite.anims.currentAnim) {
+      if (this.sprite.anims.currentAnim.key === "left") {
+        velocityX = -laserSpeed;
+      } else if (this.sprite.anims.currentAnim.key === "right") {
+        velocityX = laserSpeed;
+      } else if (this.sprite.anims.currentAnim.key === "up") {
+        velocityY = -laserSpeed;
+      } else if (this.sprite.anims.currentAnim.key === "down") {
+        velocityY = laserSpeed;
+      }
     }
 
     // set the lasers velocity based on determined direction
