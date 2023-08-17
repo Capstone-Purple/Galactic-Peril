@@ -62,7 +62,7 @@ class MainMenu extends Phaser.Scene {
         fontFamily: "Comic Sans MS",
         font: "30px Impact",
       });
-      instructions = this.add.text(225, 670, "Instructions: Arrow Keys to move, Spacebar to interact with objects", {
+      instructions = this.add.text(155, 750, "Instructions: Arrow Keys to move, Shift to interact with objects, Spacebar to shoot", {
         fontFamily: "Comic Sans MS",
         font: "25px Impact",
       });
