@@ -363,7 +363,7 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.10.2",
+ "tiledversion":"1.10.1",
  "tileheight":16,
  "tilesets":[
         {
@@ -382,7 +382,7 @@
         {
          "columns":32,
          "firstgid":513,
-         "image":"..\/..\/..\/..\/CapstonePictures\/SciFi\/A4_SciFi.png",
+         "image":"..\/..\/..\/SciFi\/A4_SciFi.png",
          "imageheight":480,
          "imagewidth":512,
          "margin":0,
@@ -9049,7 +9049,7 @@
         {
          "columns":32,
          "firstgid":1473,
-         "image":"..\/..\/..\/..\/CapstonePictures\/SciFi\/SciFi_Deco_3.png",
+         "image":"..\/..\/..\/SciFi\/SciFi_Deco_3.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
@@ -18293,7 +18293,7 @@
         {
          "columns":18,
          "firstgid":2497,
-         "image":"..\/..\/..\/..\/CapstonePictures\/SciFi\/Animated Items\/!$Objects_1.png",
+         "image":"..\/..\/..\/SciFi\/Animated Items\/!$Objects_1.png",
          "imageheight":384,
          "imagewidth":288,
          "margin":0,

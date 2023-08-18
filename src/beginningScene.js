@@ -1,6 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
-const {loadAssets, placeMenus} = require("./boilerplate.js").default;
+const { loadAssets, placeMenus } = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -16,20 +16,21 @@ class beginningScene extends Phaser.Scene {
   preload() {
     loadAssets(this);
     this.load.tilemapTiledJSON(
-      "beginningSceneShip",
+      "beginning",
       "tilesets/Starship-Map-Beginning-Scene.json"
     );
   }
 
   create() {
-    const map = this.make.tilemap({ key: "beginningSceneShip" });
+    const map = this.make.tilemap({ key: "beginning" });
     const backgroundTileset = map.addTilesetImage(
       "background",
       "background-tiles"
     );
     const floorTileset = map.addTilesetImage("floor", "floor-tiles");
     const wallTileset = map.addTilesetImage("wall1", "wall-tiles");
-
+    const wall2Tileset = map.addTilesetImage("wall", "wall2-tiles");
+    const doorTileset = map.addTilesetImage("door", "door-tiles");
     const medical1Tileset = map.addTilesetImage("medical1", "medical1-tiles");
     const medical2Tileset = map.addTilesetImage("medical2", "medical2-tiles");
 
@@ -50,7 +51,13 @@ class beginningScene extends Phaser.Scene {
 
     map.createLayer("Background", backgroundTileset, 0, 0);
     const floorLayer = map.createLayer("Ground", floorTileset, 0, 0);
-    const wallsLayer = map.createLayer("Walls", wallTileset, 0, 0);
+    const wallsLayer = map.createLayer(
+      "Walls",
+      [wallTileset, wall2Tileset],
+      0,
+      0
+    );
+    const doorLayer = map.createLayer("Door", doorTileset, 0, 0);
     const medicalLayer = map.createLayer(
       "Medical",
       [medical1Tileset, medical2Tileset],
@@ -60,6 +67,7 @@ class beginningScene extends Phaser.Scene {
 
     wallsLayer.setCollisionByProperty({ collides: true });
     medicalLayer.setCollisionByProperty({ collides: true });
+    doorLayer.setCollisionByProperty({ collides: true });
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
@@ -72,12 +80,12 @@ class beginningScene extends Phaser.Scene {
     this.registry.set("prevRoom", "beginningScene");
 
     platform = this.physics.add.staticGroup();
-    let door = platform.create(1125, 325, "door").setAlpha(50);
+    let door = platform.create(1015, 330, "door").setAlpha(0);
     this.physics.add.collider(
       player.sprite,
       door,
       function () {
-        this.scene.start("Cafeteria");
+        this.scene.start("escapeRoomScene");
       },
       null,
       this
@@ -86,7 +94,7 @@ class beginningScene extends Phaser.Scene {
     //new scene text and duration
     let enterSceneText = "What's going on? Where is everyone!?";
     const displayTime = 7000;
-    
+
     player.enterNewScene(this, enterSceneText, displayTime);
     placeMenus(this, player);
   }

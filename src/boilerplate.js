@@ -29,18 +29,19 @@ function placeMenus(scene, player, enemy = null) {
     }
     localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
 
-        //SAVE PLAYER INVENTORY
-        //WILL ITEMS COLLECTED REMAIN COLLECTED??
-        // console.log(player)
-        scene.scene.start("MainMenu");
-    });
-    return saveAndQuit;
+    //SAVE PLAYER INVENTORY
+    //WILL ITEMS COLLECTED REMAIN COLLECTED??
+    // console.log(player)
+    scene.scene.start("MainMenu");
+  });
+  return saveAndQuit;
 }
 
 function loadAssets(scene) {
   scene.load.image("background-tiles", "tilesets/Starfield_1.png");
   scene.load.image("floor-tiles", "tilesets/A5_SciFi.png");
   scene.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
+  scene.load.image("wall2-tiles", "tilesets/A4_SciFi.png");
   scene.load.image("door1-tiles", "/tilesets/!$Objects_1.png");
   scene.load.image("door2-tiles", "/tilesets/!$Objects_1.png");
   scene.load.image("door-tiles", "tilesets/!$Objects_1.png");
