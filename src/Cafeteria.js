@@ -108,7 +108,6 @@ class Cafeteria extends Phaser.Scene {
     platform = this.physics.add.staticGroup();
     vending1 = platform.create(570, 97, "vendingM");
     plate1 = platform.create(660, 85, "plate1");
-    plate2 = platform.create(752, 80, "plate2");
     let collision;
 
     this.physics.add.overlap(
@@ -137,31 +136,17 @@ class Cafeteria extends Phaser.Scene {
       this
     );
 
-    this.physics.add.overlap(
-      player.sprite,
-      plate2,
-      function () {
-        collision = plate2;
-        setTimeout(() => {
-          collision = null;
-        }, 50);
-      },
-      null,
-      this
-    );
-
     this.input.keyboard.on(
       "keyup-SHIFT",
       function () {
         if (collision) {
           if (collision === vending1) {
             player.acquireItem(collision.texture.key);
+            this.registry.set("drinkCollected", true);
             collision.destroy();
           } else if (collision === plate1) {
             player.acquireItem(collision.texture.key);
-            collision.destroy();
-          } else if (collision === plate2) {
-            player.acquireItem(collision.texture.key);
+            this.registry.set("foodCollected", true);
             collision.destroy();
           } else {
             collision = null;
@@ -170,6 +155,16 @@ class Cafeteria extends Phaser.Scene {
       },
       this
     );
+
+    const drinkCollected = this.registry.get("drinkCollected");
+    if (drinkCollected) {
+      vending1.disableBody(true, true);
+    }
+
+    const foodCollected = this.registry.get("drinkCollected");
+    if (foodCollected) {
+      plate1.disableBody(true, true);
+    }
 
     placeMenus(this, player);
   }

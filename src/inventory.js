@@ -27,17 +27,16 @@ class Inventory {
             const slotX = this.x + slotIndex * this.slotSize;
             const slotY = this.y;
             
-            if (this.slots[slotIndex] !== "empty-inv") {
+            // if (this.slots[slotIndex] !== "empty-inv") {
                 let currSlot = scene.add.sprite(slotX, slotY, this.slots[slotIndex]);
                 currSlot.setOrigin(0, 0);
                 currSlot.setDisplaySize(50, 50);
-            }
+            // }
         }
     }
     
     //updates the inventory slot with a new item
     addItem(key) {
-        console.log(key);
         const firstEmpty = this.slots.findIndex((slot) => slot === "empty-inv");
         this.slots[firstEmpty] = key;
         this.scene.registry.set("inventory", this.slots);
@@ -46,7 +45,21 @@ class Inventory {
 
     // Check to see if the player is holding a specific item
     checkForItem(key) {
-        return this.slots.includes(key);
+      if (this.slots.includes(key) ){
+        return key;
+      }
+
+        // return this.slots.includes(key);
+    }
+
+    useItem(num){
+        let textureKey = this.slots[num]
+        return textureKey;
+    }
+
+    removeItem(num) {
+        this.slots[num] = "empty-inv";
+        this.display()
     }
 }
 
