@@ -44,8 +44,16 @@ class escapeRoomScene extends Phaser.Scene {
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
-    player = new Player(this, 400, 300);
-    this.registry.set("prevRoom", "beginningScene");
+    if (prevRoom === "Cafeteria") {
+      player = new Player(this, 900, 315);      
+    } else {
+      player = new Player(this, 200, 300);
+      //new scene text and duration
+      let enterSceneText = "Hold on, what... who are you? What's going on? Stop chasing me...";
+      const displayTime = 7000;
+      player.enterNewScene(this, enterSceneText, displayTime);
+    }
+    this.registry.set("prevRoom", "Hall");
     player.inventory.display();
 
     this.physics.add.collider(player.sprite, [wallsLayer]);
@@ -157,13 +165,6 @@ class escapeRoomScene extends Phaser.Scene {
       null,
       this
     );
-
-    //new scene text and duration
-    let enterSceneText =
-      "Hold on, what... who are you? What's going on? Stop chasing me...";
-    const displayTime = 7000;
-
-    player.enterNewScene(this, enterSceneText, displayTime);
   }
 
   update() {
