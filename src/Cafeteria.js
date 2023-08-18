@@ -53,7 +53,13 @@ class Cafeteria extends Phaser.Scene {
 
       const prevRoom = this.registry.get("prevRoom");
       console.log(prevRoom);
-      player = new Player(this, 260, 250);
+      if (prevRoom === "Armory") {
+        player = new Player(this, 850, 150);
+      } else if (prevRoom === "Scene1") {
+        player = new Player(this, 850, 525);
+      } else {
+        player = new Player(this, 260, 250);
+      }
       this.physics.add.collider(player.sprite, [
         wallLayer,
         furnitureLayer

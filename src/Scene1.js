@@ -63,7 +63,11 @@ class Scene1 extends Phaser.Scene {
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
-    player = new Player(this, 400, 300);
+    if (prevRoom === "endingScene") {
+      player = new Player(this, 575, 425);
+    } else {
+      player = new Player(this, 200, 325);
+    }
     this.registry.set("prevRoom", "Scene1");
     player.inventory.display()
 

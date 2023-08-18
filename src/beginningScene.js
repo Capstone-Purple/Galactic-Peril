@@ -47,7 +47,11 @@ class beginningScene extends Phaser.Scene {
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
-    player = new Player(this, 260, 250);
+    if (prevRoom === "Cafeteria") {
+      player = new Player(this, 1000, 315);
+    } else {
+        player = new Player(this, 260, 250);
+    }
     this.physics.add.collider(player.sprite, [
       floorLayer,
       wallsLayer,
