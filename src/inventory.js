@@ -22,18 +22,30 @@ class Inventory {
     }
 
     // Show inventory contents in scene.
+    // display() {
+    //     const { scene } = this;
+    //     for (let slot in this.slots) {
+    //         const slotX = this.x + slot * this.slotSize;
+    //         const slotY = this.y;
+    //         let currSlot = scene.add.sprite(slotX, slotY, this.slots[slot]);
+    //         currSlot.setOrigin(0, 0);
+    //         currSlot.setDisplaySize(50, 50);
+    //         // console.log('tried to add', slotX, slotY, this.slots[slot]);
+    //     }
+    // }
     display() {
         const { scene } = this;
-        for (let slot in this.slots) {
-            const slotX = this.x + slot * this.slotSize;
+        for (let slotIndex = 0; slotIndex < this.slots.length; slotIndex++) {
+            const slotX = this.x + slotIndex * this.slotSize;
             const slotY = this.y;
-            let currSlot = scene.add.sprite(slotX, slotY, this.slots[slot]);
-            currSlot.setOrigin(0, 0);
-            currSlot.setDisplaySize(50, 50);
-            // console.log('tried to add', slotX, slotY, this.slots[slot]);
+            
+            if (this.slots[slotIndex] !== "empty-inv") {
+                let currSlot = scene.add.sprite(slotX, slotY, this.slots[slotIndex]);
+                currSlot.setOrigin(0, 0);
+                currSlot.setDisplaySize(50, 50);
+            }
         }
     }
-
     //updates the inventory slot with a new item
     addItem(key) {
         console.log(key);
