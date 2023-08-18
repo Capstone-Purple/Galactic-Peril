@@ -100,6 +100,7 @@ class Scene1 extends Phaser.Scene {
             textcount++;
             let lockedDoorText =
               "Locked! Hmmmm... I wonder what these consoles can do...";
+              const displayTime = 7000;
             player.enterNewScene(this, lockedDoorText, displayTime);
             setTimeout(() => {
               textcount--;

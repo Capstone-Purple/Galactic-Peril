@@ -45,11 +45,12 @@ class escapeRoomScene extends Phaser.Scene {
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
     if (prevRoom === "Cafeteria") {
-      player = new Player(this, 900, 315);      
+      player = new Player(this, 900, 315);
     } else {
       player = new Player(this, 200, 300);
       //new scene text and duration
-      let enterSceneText = "Hold on, what... who are you? What's going on? Stop chasing me...";
+      let enterSceneText =
+        "Hold on, what... who are you? What's going on? Stop chasing me...";
       const displayTime = 7000;
       player.enterNewScene(this, enterSceneText, displayTime);
     }
@@ -138,7 +139,7 @@ class escapeRoomScene extends Phaser.Scene {
           });
           restartBtn
             .setInteractive({ cursor: "pointer" })
-            .on("pointerdown", () => this.scene.start("Scene1"));
+            .on("pointerdown", () => this.scene.start("escapeRoomScene"));
         }
       },
       null,

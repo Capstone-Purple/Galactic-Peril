@@ -44,7 +44,14 @@ class armoryScene extends Phaser.Scene {
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
-    player = new Player(this, 200, 430);
+    if (prevRoom === "Cafeteria") {
+      player = new Player(this, 200, 430);
+      //new scene text and duration
+      let enterSceneText =
+        "Oh the armory. Which weapon should I pick? The pistol in the third case looks cool.";
+      const displayTime = 7000;
+      player.enterNewScene(this, enterSceneText, displayTime);
+    }
     this.registry.set("prevRoom", "Armory");
 
     platform = this.physics.add.staticGroup();
@@ -58,27 +65,37 @@ class armoryScene extends Phaser.Scene {
       null,
       this
     );
-      
+
     if (!player.inventory.checkForItem("pistol")) {
-      let pistol = platform.create(734,122,"pistol");
-      player.healthBar.bar.setVisible(false)
+      let pistol = platform.create(734, 122, "pistol");
+      player.healthBar.bar.setVisible(false);
       let collision;
-      this.physics.add.overlap(player.sprite, pistol, function () {
-        collision = pistol;
-        setTimeout(() => {
-          collision = null;
-        }, 100);
-      }, null, this);
-      this.input.keyboard.on("keyup-SHIFT", function() {
-        if (collision) {
-          if (collision === pistol) {
-            player.acquireItem(collision.texture.key);
-            pistol.setActive(false).setVisible(false)
+      this.physics.add.overlap(
+        player.sprite,
+        pistol,
+        function () {
+          collision = pistol;
+          setTimeout(() => {
+            collision = null;
+          }, 100);
+        },
+        null,
+        this
+      );
+      this.input.keyboard.on(
+        "keyup-SHIFT",
+        function () {
+          if (collision) {
+            if (collision === pistol) {
+              player.acquireItem(collision.texture.key);
+              pistol.setActive(false).setVisible(false);
+            }
           }
-        }
-      }, this);
+        },
+        this
+      );
     }
-      
+
     player.inventory.display();
 
     this.physics.add.collider(player.sprite, [
@@ -126,8 +143,6 @@ class armoryScene extends Phaser.Scene {
       // console.log(player)
       this.scene.start("MainMenu");
     });
-
-    const displayTime = 7000;
 
     placeMenus(this, player);
   }
