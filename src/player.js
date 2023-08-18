@@ -179,7 +179,7 @@ class Player {
 
     // check for space bar input to shoot
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
-      if (this.inventory.checkForItem("pistol")) {
+      if (this.inventory.checkForItem("pistol") === "pistol") {
         this.shootLaser();
       } else {
         let weaponText =
@@ -286,6 +286,8 @@ class Player {
       } else if (this.sprite.anims.currentAnim.key === "down") {
         velocityY = laserSpeed;
       }
+    } else {
+      velocityY = laserSpeed;
     }
 
     // set the lasers velocity based on determined direction
