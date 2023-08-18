@@ -59,6 +59,10 @@ class beginningScene extends Phaser.Scene {
       player = new Player(this, 900, 315);
     } else {
         player = new Player(this, 260, 250);
+        //new scene text and duration
+        let enterSceneText = "What's going on? Where is everyone!?";
+        const displayTime = 7000;
+        player.enterNewScene(this, enterSceneText, displayTime);
     }
     this.physics.add.collider(player.sprite, [
       floorLayer,
@@ -79,11 +83,6 @@ class beginningScene extends Phaser.Scene {
       this
     );
 
-    //new scene text and duration
-    let enterSceneText = "What's going on? Where is everyone!?";
-    const displayTime = 7000;
-
-    player.enterNewScene(this, enterSceneText, displayTime);
     placeMenus(this, player);
   }
 

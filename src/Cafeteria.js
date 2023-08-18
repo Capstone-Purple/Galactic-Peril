@@ -58,6 +58,11 @@ class Cafeteria extends Phaser.Scene {
         player = new Player(this, 850, 525);
       } else {
         player = new Player(this, 175, 300);
+        //new scene text and duration
+        let enterSceneText =
+          "                                                                   Great, the cafeteria! This looks like a good place to get something to eat.";
+        const displayTime = 7000;
+        player.enterNewScene(this, enterSceneText, displayTime);
       }
       this.physics.add.collider(player.sprite, [
         wallLayer,
@@ -199,13 +204,6 @@ class Cafeteria extends Phaser.Scene {
     );
 
     placeMenus(this, player);
-
-    //new scene text and duration
-    let enterSceneText =
-      "                                                     Great, the cafeteria! This looks like a good place to get something to eat.";
-    const displayTime = 7000;
-
-    player.enterNewScene(this, enterSceneText, displayTime);
   }
 
   update() {
