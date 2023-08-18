@@ -99,6 +99,7 @@ class Scene1 extends Phaser.Scene {
             textcount++;
             let lockedDoorText =
               "Locked! Hmmmm... I wonder what these consoles can do...";
+              const displayTime = 7000;
             player.enterNewScene(this, lockedDoorText, displayTime);
             setTimeout(() => {
               textcount--;
@@ -121,7 +122,6 @@ class Scene1 extends Phaser.Scene {
     );
     player.healthBar.bar.setDepth(1);
     player.sprite.setDepth(1);
-    player.laser.setDepth(1);
     platform = this.physics.add.staticGroup();
     let blackscreen = platform.create(575, 279, "blackscreen");
     blackscreen.setScale(0.8).setDepth(0);
