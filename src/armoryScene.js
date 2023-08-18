@@ -48,7 +48,7 @@ class armoryScene extends Phaser.Scene {
     this.registry.set("prevRoom", "Cafeteria");
 
     platform = this.physics.add.staticGroup();
-    let door = platform.create(100, 430, "door").setAlpha(100);
+    let door = platform.create(100, 430, "door").setAlpha(0);
     this.physics.add.collider(
       player.sprite,
       door,
@@ -58,7 +58,27 @@ class armoryScene extends Phaser.Scene {
       null,
       this
     );
-
+      
+    if (!player.inventory.checkForItem("pistol")) {
+      let pistol = platform.create(734,122,"pistol");
+      player.healthBar.bar.setVisible(false)
+      let collision;
+      this.physics.add.overlap(player.sprite, pistol, function () {
+        collision = pistol;
+        setTimeout(() => {
+          collision = null;
+        }, 100);
+      }, null, this);
+      this.input.keyboard.on("keyup-SHIFT", function() {
+        if (collision) {
+          if (collision === pistol) {
+            player.acquireItem(collision.texture.key);
+            pistol.setActive(false).setVisible(false)
+          }
+        }
+      }, this);
+    }
+      
     player.inventory.display();
 
     this.physics.add.collider(player.sprite, [

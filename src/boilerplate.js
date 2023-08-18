@@ -34,6 +34,23 @@ function placeMenus(scene, player, enemy = null) {
     // console.log(player)
     scene.scene.start("MainMenu");
   });
+
+  const musicPlaying = scene.registry.get("musicPlaying");
+  if (!musicPlaying) {
+    scene.music = scene.sound.add("background-music");
+    const musicConfig = {
+      mute: false,
+      volume: 0.3,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0,
+    };
+    scene.music.play(musicConfig);
+    scene.registry.set("musicPlaying", true);
+  }
+
   return saveAndQuit;
 }
 
@@ -70,7 +87,7 @@ function loadAssets(scene) {
   scene.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");
 
   scene.load.image("laser", "/weapons/Laser.png");
-  scene.load.image("pistol", "/images/alienPistol.png");
+  scene.load.image("pistol", "/images/pistol.png");
   scene.load.image("empty-inv", "/images/inventoryIcon.png");
 
   scene.load.image("armory-tiles", "tilesets/Armory.png");

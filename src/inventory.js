@@ -10,7 +10,13 @@ class Inventory {
         this.rows = 1;
         this.cols = 3;
         this.slotSize = 70;
-        this.slots = ["empty-inv", "empty-inv", "empty-inv"];
+        // If the player picked up items in a previous room, add them to inventory.
+        const currInventory = this.scene.registry.get("inventory");
+        if (currInventory) {
+            this.slots = currInventory;
+        } else {
+            this.slots = ["empty-inv", "empty-inv", "empty-inv"];
+        }
 
         this.display();
     }
@@ -33,6 +39,7 @@ class Inventory {
         console.log(key);
         const firstEmpty = this.slots.findIndex((slot) => slot === "empty-inv");
         this.slots[firstEmpty] = key;
+        this.scene.registry.set("inventory", this.slots);
         this.display();
     }
 

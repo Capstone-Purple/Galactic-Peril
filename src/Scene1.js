@@ -159,23 +159,20 @@ class Scene1 extends Phaser.Scene {
       player.sprite,
       enemy.sprite,
       function () {
-        // console.log("player location => ", Math.floor(player.sprite.x), Math.floor(player.sprite.y))
-        // console.log("enemy location => ", Math.floor(enemy.sprite.x), Math.floor(enemy.sprite.y))
-
-        // player.sprite.setTint(0xff0000);
         const damageAmount = 0.5;
         player.healthBar.decrease(damageAmount);
+
+        this.registry.set("health", player.healthBar.value);
         if (player.healthBar.value === 0) {
           let gameOver = this.add.text(360, 240, "Game Over", {
             fontFamily: "Comic Sans MS",
             font: "20px Impact",
             color: "black",
-          }); //, stroke: '#ffff00', strokeThickness: 2})
+          });
           this.tweens.addCounter({
             from: 0,
             to: 1,
             duration: 3000,
-            //yoyo: true,
             onUpdate: (tween) => {
               const v = tween.getValue();
               const c = 255 * v;
@@ -213,11 +210,19 @@ class Scene1 extends Phaser.Scene {
           enemy.sprite.body.setEnable(false);
           enemy.sprite.disableBody(true, true);
           enemy.healthBar.bar.setVisible(false);
+          this.registry.set("aliendDefeated", true);
         }
       },
       null,
       this
     );
+
+    const alienDefeated = this.registry.get("aliendDefeated");
+    if (alienDefeated) {
+      enemy.sprite.body.setEnable(false);
+      enemy.sprite.disableBody(true, true);
+      enemy.healthBar.bar.setVisible(false);
+    }
 
     //new scene text and duration
     let enterSceneText =

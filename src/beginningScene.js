@@ -10,7 +10,6 @@ const moveSpeed = 1;
 class beginningScene extends Phaser.Scene {
   constructor() {
     super({ key: "beginningScene" });
-    this.musicPlaying = false;
   }
 
   preload() {
@@ -33,21 +32,6 @@ class beginningScene extends Phaser.Scene {
     const doorTileset = map.addTilesetImage("door", "door-tiles");
     const medical1Tileset = map.addTilesetImage("medical1", "medical1-tiles");
     const medical2Tileset = map.addTilesetImage("medical2", "medical2-tiles");
-
-    if (!this.musicPlaying) {
-      this.music = this.sound.add("background-music");
-      const musicConfig = {
-        mute: false,
-        volume: 0.3,
-        rate: 1,
-        detune: 0,
-        seek: 0,
-        loop: true,
-        delay: 0,
-      };
-      this.music.play(musicConfig);
-      this.musicPlaying = true;
-    }
 
     map.createLayer("Background", backgroundTileset, 0, 0);
     const floorLayer = map.createLayer("Ground", floorTileset, 0, 0);

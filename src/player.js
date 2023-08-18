@@ -35,6 +35,13 @@ class HealthBar {
     this.value = 100;
     this.p = 76 / 100;
 
+    const saveHealthValue = scene.registry.get("health");
+    if (saveHealthValue) {
+      this.value = saveHealthValue;
+    } else {
+      this.value = 100
+    }
+
     //render health bar
     this.draw();
     scene.add.existing(this.bar);
@@ -146,13 +153,14 @@ class Player {
 
     // check for space bar input to shoot
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
-      this.shootLaser();
       if (this.inventory.checkForItem("pistol")) {
         this.shootLaser();
       } else {
-        let weaponText =
-          "                                               There should be an armory somewhere on this ship... Hopefully...";
+        let weaponText = "                                                   There should be an armory somewhere on this ship... Hopefully...";
         this.textBox.showText(weaponText);
+        setTimeout(() => {
+          this.textBox.hideText();
+        }, 7000);
       }
     }
 
