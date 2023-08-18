@@ -35,6 +35,13 @@ class HealthBar {
     this.value = 100;
     this.p = 76 / 100;
 
+    const saveHealthValue = scene.registry.get("health");
+    if (saveHealthValue) {
+      this.value = saveHealthValue;
+    } else {
+      this.value = 100
+    }
+
     //render health bar
     this.draw();
     scene.add.existing(this.bar);
