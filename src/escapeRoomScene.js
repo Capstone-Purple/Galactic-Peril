@@ -111,6 +111,8 @@ class escapeRoomScene extends Phaser.Scene {
       function () {
         const damageAmount = 0.5;
         player.healthBar.decrease(damageAmount);
+
+        this.registry.set("health", player.healthBar.value);
         if (player.healthBar.value === 0) {
           let gameOver = this.add.text(360, 240, "Game Over", {
             fontFamily: "Comic Sans MS",

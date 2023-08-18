@@ -1,6 +1,8 @@
 const Phaser = require("phaser");
+const { Tween, Easing } = Phaser.Tweens;
 
 let shipLayer;
+let congratsText;
 const moveSpeed = 4;
 
 class endingSpaceShip extends Phaser.Scene {
@@ -30,6 +32,24 @@ class endingSpaceShip extends Phaser.Scene {
 
     shipLayer = map.createLayer("Ship", shipTileset, 0, 0);
     shipLayer.x = -shipLayer.width;
+
+    congratsText = this.add.text(200, 240, "Congratulations", {
+      fontFamily: "Comic Sans MS",
+      font: "20px Impact",
+      color: "black",
+    });
+    this.tweens.addCounter({
+      from: 0,
+      to: 1,
+      duration: 3500,
+      onUpdate: (tween) => {
+        const v = tween.getValue();
+        const c = 255 * v;
+        congratsText.setFontSize(40 + v * 64);
+        congratsText.setColor(`rgb(${c}, 0, 0)`); // Adjust the color values as needed
+      },
+    });
+
     this.events.on("update", this.updateShipLayer, this);
   }
 
