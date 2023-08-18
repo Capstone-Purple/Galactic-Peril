@@ -51,13 +51,15 @@ class Cafeteria extends Phaser.Scene {
       door3Layer.setCollisionByProperty({ collides: true });
 
 
-      
+      const prevRoom = this.registry.get("prevRoom");
+      console.log(prevRoom);
       player = new Player(this, 260, 250);
       this.physics.add.collider(player.sprite, [
         wallLayer,
         furnitureLayer
       ]);
       player.inventory.display();
+      this.registry.set("prevRoom", "Cafeteria");
 
       this.physics.add.collider(player.sprite,door1Layer, function () {
         this.scene.start("beginningScene")

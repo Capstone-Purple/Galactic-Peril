@@ -45,7 +45,7 @@ class armoryScene extends Phaser.Scene {
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
     player = new Player(this, 200, 430);
-    this.registry.set("prevRoom", "Cafeteria");
+    this.registry.set("prevRoom", "Armory");
 
     platform = this.physics.add.staticGroup();
     let door = platform.create(100, 430, "door").setAlpha(0);
