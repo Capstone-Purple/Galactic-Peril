@@ -57,7 +57,7 @@ class Cafeteria extends Phaser.Scene {
       } else if (prevRoom === "Scene1") {
         player = new Player(this, 850, 525);
       } else {
-        player = new Player(this, 260, 250);
+        player = new Player(this, 175, 300);
       }
       this.physics.add.collider(player.sprite, [
         wallLayer,

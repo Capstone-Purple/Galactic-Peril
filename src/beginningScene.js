@@ -55,8 +55,8 @@ class beginningScene extends Phaser.Scene {
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
-    if (prevRoom === "Cafeteria") {
-      player = new Player(this, 1000, 315);
+    if (prevRoom === "Hall") {
+      player = new Player(this, 900, 315);
     } else {
         player = new Player(this, 260, 250);
     }
