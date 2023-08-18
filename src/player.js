@@ -39,7 +39,7 @@ class HealthBar {
     if (saveHealthValue) {
       this.value = saveHealthValue;
     } else {
-      this.value = 100
+      this.value = 100;
     }
 
     //render health bar
@@ -135,20 +135,31 @@ class Player {
     const { cursors, sprite } = this;
     if (cursors.left.isDown) {
       sprite.setVelocityX(-160);
-      sprite.anims.play("left", true);
     } else if (cursors.right.isDown) {
       sprite.setVelocityX(160);
-      sprite.anims.play("right", true);
-    } else if (cursors.up.isDown) {
+    } else {
+      sprite.setVelocityX(0);
+    }
+
+    if (cursors.up.isDown) {
       sprite.setVelocityY(-160);
-      sprite.anims.play("up", true);
     } else if (cursors.down.isDown) {
       sprite.setVelocityY(160);
+    } else {
+      sprite.setVelocityY(0);
+    }
+
+    // Play animations based on the active direction(s)
+    if (cursors.left.isDown) {
+      sprite.anims.play("left", true);
+    } else if (cursors.right.isDown) {
+      sprite.anims.play("right", true);
+    } else if (cursors.up.isDown) {
+      sprite.anims.play("up", true);
+    } else if (cursors.down.isDown) {
       sprite.anims.play("down", true);
     } else {
       sprite.anims.stop();
-      sprite.setVelocityX(0);
-      sprite.setVelocityY(0);
     }
 
     // check for space bar input to shoot
@@ -156,7 +167,8 @@ class Player {
       if (this.inventory.checkForItem("pistol")) {
         this.shootLaser();
       } else {
-        let weaponText = "                                                   There should be an armory somewhere on this ship... Hopefully...";
+        let weaponText =
+          "                                                   There should be an armory somewhere on this ship... Hopefully...";
         this.textBox.showText(weaponText);
         setTimeout(() => {
           this.textBox.hideText();
