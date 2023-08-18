@@ -12,11 +12,11 @@ class armoryScene extends Phaser.Scene {
 
   preload() {
     loadAssets(this);
-    this.load.tilemapTiledJSON("armorySceneShip", "tilesets/Armory.json");
+    this.load.tilemapTiledJSON("armory", "tilesets/Armory.json");
   }
 
   create() {
-    const map = this.make.tilemap({ key: "armorySceneShip" });
+    const map = this.make.tilemap({ key: "armory" });
     const backgroundTileset = map.addTilesetImage(
       "background",
       "background-tiles"
