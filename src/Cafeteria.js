@@ -99,6 +99,9 @@ class Cafeteria extends Phaser.Scene {
       vending1,
       function () {
         collision = vending1;
+        setTimeout(() => {
+          collision = null;
+        }, 50);
       },
       null,
       this
@@ -109,6 +112,9 @@ class Cafeteria extends Phaser.Scene {
       plate1,
       function () {
         collision = plate1;
+        setTimeout(() => {
+          collision = null;
+        }, 50);
       },
       null,
       this
@@ -119,6 +125,9 @@ class Cafeteria extends Phaser.Scene {
       plate2,
       function () {
         collision = plate2;
+        setTimeout(() => {
+          collision = null;
+        }, 50);
       },
       null,
       this
@@ -131,53 +140,12 @@ class Cafeteria extends Phaser.Scene {
           if (collision === vending1) {
             player.acquireItem(collision.texture.key);
             collision.destroy();
-            // vending1.destroy();
-            // collision = false;
-            setTimeout(() => {
-              collision = null;
-              vending1 = platform.create(570, 97, "vendingM");
-              this.physics.add.overlap(
-                player.sprite,
-                vending1,
-                function () {
-                  collision = vending1;
-                },
-                null,
-                this
-              );
-            }, 3000);
           } else if (collision === plate1) {
             player.acquireItem(collision.texture.key);
             collision.destroy();
-            setTimeout(() => {
-              collision = null;
-              plate1 = platform.create(660, 85, "plate1");
-              this.physics.add.overlap(
-                player.sprite,
-                plate1,
-                function () {
-                  collision = plate1;
-                },
-                null,
-                this
-              );
-            }, 3000);
           } else if (collision === plate2) {
             player.acquireItem(collision.texture.key);
             collision.destroy();
-            setTimeout(() => {
-              collision = null;
-              plate2 = platform.create(752, 80, "plate2");
-              this.physics.add.overlap(
-                player.sprite,
-                plate2,
-                function () {
-                  collision = plate2;
-                },
-                null,
-                this
-              );
-            }, 3000);
           } else {
             collision = null;
           }
