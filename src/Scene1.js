@@ -93,6 +93,7 @@ class Scene1 extends Phaser.Scene {
       door1Layer,
       function () {
         if (blackscreen.active === false) {
+          this.registry.set("health", player.healthBar.value);
           this.scene.start("endingScene");
         } else {
           if (textcount === 0) {
@@ -114,6 +115,7 @@ class Scene1 extends Phaser.Scene {
       player.sprite,
       door2Layer,
       function () {
+        this.registry.set("health", player.healthBar.value);
         this.scene.start("Cafeteria");
       },
       null,
@@ -169,8 +171,6 @@ class Scene1 extends Phaser.Scene {
       function () {
         const damageAmount = 0.5;
         player.healthBar.decrease(damageAmount);
-
-        this.registry.set("health", player.healthBar.value);
         if (player.healthBar.value === 0) {
           let gameOver = this.add.text(360, 240, "Game Over", {
             fontFamily: "Comic Sans MS",

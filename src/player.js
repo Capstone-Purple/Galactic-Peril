@@ -47,6 +47,18 @@ class HealthBar {
     scene.add.existing(this.bar);
   }
 
+  increase(amount) {
+    this.value += amount;
+
+    if ( this.value > 100) {
+      this.value = 100;
+    }
+
+    this.draw();
+
+    return this.value;
+  }
+
   decrease(amount) {
     this.value -= amount;
 
@@ -124,6 +136,9 @@ class Player {
 
     this.sprite = scene.physics.add.sprite(posX, posY, "captain");
     this.cursors = scene.input.keyboard.createCursorKeys();
+    this.key1 = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE)
+    this.key2 = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO)
+    this.key3 = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE)
 
     // creating laser sprite
     this.laser = scene.physics.add.sprite(0, 0, "laser");
@@ -183,6 +198,48 @@ class Player {
     //damage amount
     const damageAmount = 0.0;
     this.healthBar.decrease(damageAmount);
+
+    //use items in inventory
+    if (this.key1.isDown) {
+      if(this.inventory.checkForItem(this.inventory.useItem(0)) === 'vendingM'){
+        console.log("your health points went up by 50!")
+        this.healthBar.increase(50)
+        this.inventory.removeItem(0)
+      } else if (this.inventory.checkForItem(this.inventory.useItem(0)) === 'plate1'){
+        console.log("your health points went up by 20!")
+        this.healthBar.increase(20)
+        this.inventory.removeItem(0)
+      } else { 
+        console.log("You do not have useable items")
+      }
+    }
+    //for the second inventory slot
+    if (this.key2.isDown) {
+      if(this.inventory.checkForItem(this.inventory.useItem(1)) === 'vendingM'){
+        console.log("health up 50!")
+        this.healthBar.increase(50)
+        this.inventory.removeItem(1)
+      } else if (this.inventory.checkForItem(this.inventory.useItem(1)) === 'plate1'){
+        console.log("health+20!")
+        this.healthBar.increase(20)
+        this.inventory.removeItem(1)
+      } else { 
+        console.log("You do not have useable items")
+      }
+    }
+    if (this.key3.isDown) {
+      if(this.inventory.checkForItem(this.inventory.useItem(2)) === 'vendingM'){
+        console.log("your health points went up by 50!")
+        this.healthBar.increase(50)
+        this.inventory.removeItem(2)
+      } else if (this.inventory.checkForItem(this.inventory.useItem(2)) === 'plate1'){
+        console.log("your health points went up by 20!")
+        this.healthBar.increase(20)
+        this.inventory.removeItem(2)
+      } else { 
+        console.log("You do not have useable items")
+      }
+    }
   }
 
   acquireItem(itemKey) {

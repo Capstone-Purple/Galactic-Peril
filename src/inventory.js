@@ -45,7 +45,22 @@ class Inventory {
 
     // Check to see if the player is holding a specific item
     checkForItem(key) {
-        return this.slots.includes(key);
+      console.log("Congrats You Failed from check function")
+      if (this.slots.includes(key) ){
+        return key;
+      }
+
+        // return this.slots.includes(key);
+    }
+
+    useItem(num){
+        let textureKey = this.slots[num]
+        return textureKey;
+    }
+
+    removeItem(num) {
+        this.slots[num] = "empty-inv";
+        this.display()
     }
 }
 
