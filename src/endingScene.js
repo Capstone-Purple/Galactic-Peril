@@ -1,6 +1,6 @@
 const Phaser = require("phaser");
 const Player = require("./player.js").default;
-const {placeMenus, loadAssets} = require("./boilerplate.js").default;
+const { placeMenus, loadAssets } = require("./boilerplate.js").default;
 
 let player;
 let platform;
@@ -13,13 +13,13 @@ class endingScene extends Phaser.Scene {
   preload() {
     loadAssets(this);
     this.load.tilemapTiledJSON(
-      "endSceneShip",
+      "ending",
       "tilesets/Starship-Map-Ending-Scene.json"
     );
   }
 
   create() {
-    const map = this.make.tilemap({ key: "endSceneShip" });
+    const map = this.make.tilemap({ key: "ending" });
     const backgroundTileset = map.addTilesetImage(
       "background",
       "background-tiles"
@@ -46,7 +46,7 @@ class endingScene extends Phaser.Scene {
     doorLayer.setCollisionByProperty({ collides: true });
     doorFrameLayer.setCollisionByProperty({ collides: true });
     map.createLayer("Ship", shipTileset, 0, 0);
-    
+
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
     player = new Player(this, 560, 150);
@@ -82,7 +82,7 @@ class endingScene extends Phaser.Scene {
     //new scene text and duration
     let enterSceneText = "An escape pod! This might be my way out of here.";
     const displayTime = 7000;
-    
+
     player.enterNewScene(this, enterSceneText, displayTime);
     placeMenus(this, player);
   }

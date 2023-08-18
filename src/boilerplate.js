@@ -29,35 +29,36 @@ function placeMenus(scene, player, enemy = null) {
     }
     localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
 
-        //SAVE PLAYER INVENTORY
-        //WILL ITEMS COLLECTED REMAIN COLLECTED??
-        // console.log(player)
-        scene.scene.start("MainMenu");
-    });
+    //SAVE PLAYER INVENTORY
+    //WILL ITEMS COLLECTED REMAIN COLLECTED??
+    // console.log(player)
+    scene.scene.start("MainMenu");
+  });
 
-    const musicPlaying = scene.registry.get("musicPlaying");
-    if (!musicPlaying) {
-        scene.music = scene.sound.add("background-music");
-        const musicConfig = {
-          mute: false,
-          volume: 0.3,
-          rate: 1,
-          detune: 0,
-          seek: 0,
-          loop: true,
-          delay: 0,
-        };
-        scene.music.play(musicConfig);
-        scene.registry.set("musicPlaying", true);
-      }
+  const musicPlaying = scene.registry.get("musicPlaying");
+  if (!musicPlaying) {
+    scene.music = scene.sound.add("background-music");
+    const musicConfig = {
+      mute: false,
+      volume: 0.3,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0,
+    };
+    scene.music.play(musicConfig);
+    scene.registry.set("musicPlaying", true);
+  }
 
-    return saveAndQuit;
+  return saveAndQuit;
 }
 
 function loadAssets(scene) {
   scene.load.image("background-tiles", "tilesets/Starfield_1.png");
   scene.load.image("floor-tiles", "tilesets/A5_SciFi.png");
   scene.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
+  scene.load.image("wall2-tiles", "tilesets/A4_SciFi.png");
   scene.load.image("door1-tiles", "/tilesets/!$Objects_1.png");
   scene.load.image("door2-tiles", "/tilesets/!$Objects_1.png");
   scene.load.image("door-tiles", "tilesets/!$Objects_1.png");

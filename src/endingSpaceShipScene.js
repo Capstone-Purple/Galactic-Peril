@@ -12,13 +12,13 @@ class endingSpaceShip extends Phaser.Scene {
     this.load.image("background-tiles", "tilesets/Starfield_1.png");
     this.load.image("ship-tiles", "tilesets/!$ViewScreen_1.png");
     this.load.tilemapTiledJSON(
-      "endingShipScene",
+      "endingShip",
       "tilesets/Ending-Space-Ship-Scene.json"
     );
   }
 
   create() {
-    const map = this.make.tilemap({ key: "endingShipScene" });
+    const map = this.make.tilemap({ key: "endingShip" });
     const backgroundTileset = map.addTilesetImage(
       "background",
       "background-tiles"

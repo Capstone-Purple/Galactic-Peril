@@ -68,6 +68,7 @@ class MainMenu extends Phaser.Scene {
       });
       startBtn.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
         localStorage.clear();
+        this.registry.set("health", false)
         this.scene.start("beginningScene");
       });
     } else {
@@ -77,6 +78,7 @@ class MainMenu extends Phaser.Scene {
       });
       startBtn.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
         localStorage.clear();
+        this.registry.set("health", false)
         this.scene.start("beginningScene");
       });
       const continueBtn = this.add.text(400, 400, "Continue Game", {
