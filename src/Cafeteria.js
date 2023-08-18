@@ -50,9 +50,26 @@ class Cafeteria extends Phaser.Scene {
     door2Layer.setCollisionByProperty({ collides: true });
     door3Layer.setCollisionByProperty({ collides: true });
 
-    player = new Player(this, 260, 250);
-    this.physics.add.collider(player.sprite, [wallLayer, furnitureLayer]);
-    player.inventory.display();
+      const prevRoom = this.registry.get("prevRoom");
+      console.log(prevRoom);
+      if (prevRoom === "Armory") {
+        player = new Player(this, 850, 150);
+      } else if (prevRoom === "Scene1") {
+        player = new Player(this, 850, 525);
+      } else {
+        player = new Player(this, 175, 300);
+        //new scene text and duration
+        let enterSceneText =
+          "                                                                   Great, the cafeteria! This looks like a good place to get something to eat.";
+        const displayTime = 7000;
+        player.enterNewScene(this, enterSceneText, displayTime);
+      }
+      this.physics.add.collider(player.sprite, [
+        wallLayer,
+        furnitureLayer
+      ]);
+      player.inventory.display();
+      this.registry.set("prevRoom", "Cafeteria");
 
     this.physics.add.collider(
       player.sprite,
@@ -155,13 +172,6 @@ class Cafeteria extends Phaser.Scene {
     );
 
     placeMenus(this, player);
-
-    //new scene text and duration
-    let enterSceneText =
-      "                                                     Great, the cafeteria! This looks like a good place to get something to eat.";
-    const displayTime = 7000;
-
-    player.enterNewScene(this, enterSceneText, displayTime);
   }
 
   update() {

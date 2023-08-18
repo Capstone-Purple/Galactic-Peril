@@ -5,13 +5,13 @@ const Phaser = require("phaser");
 const sceneArr = [
   MainMenu,
   beginningScene,
+  escapeRoomScene,
+  Cafeteria,
+  armoryScene,
   Scene1,
   endingScene,
   endingSpaceShip,
   Arena,
-  Cafeteria,
-  armoryScene,
-  escapeRoomScene,
 ];
 
 const path = window.location.pathname;

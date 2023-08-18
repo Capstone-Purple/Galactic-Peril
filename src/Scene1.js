@@ -60,7 +60,16 @@ class Scene1 extends Phaser.Scene {
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
-    player = new Player(this, 400, 300);
+    if (prevRoom === "endingScene") {
+      player = new Player(this, 575, 425);
+    } else {
+      player = new Player(this, 200, 325);
+      //new scene text and duration
+      let enterSceneText =
+        "Hold on, what... who are you? This isn't exactly how I imagined my day going.";
+      const displayTime = 7000;
+      player.enterNewScene(this, enterSceneText, displayTime);
+    }
     this.registry.set("prevRoom", "Scene1");
     player.inventory.display();
 
@@ -222,13 +231,6 @@ class Scene1 extends Phaser.Scene {
       enemy.sprite.disableBody(true, true);
       enemy.healthBar.bar.setVisible(false);
     }
-
-    //new scene text and duration
-    let enterSceneText =
-      "Hold on, what... who are you? This isn't exactly how I imagined my day going.";
-    const displayTime = 7000;
-
-    player.enterNewScene(this, enterSceneText, displayTime);
   }
 
   update() {
