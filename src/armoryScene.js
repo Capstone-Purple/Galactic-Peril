@@ -117,31 +117,6 @@ class armoryScene extends Phaser.Scene {
     player.sprite.setDepth(1);
     player.laser.setDepth(1);
 
-    const mainMenu = this.add.text(600, 600, "Main Menu", {
-      fontFamily: "Comic Sans MS",
-      font: "30px Impact",
-    });
-    mainMenu.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
-      this.scene.start("MainMenu");
-    });
-
-    const saveAndQuit = this.add.text(300, 600, "Save & Quit", {
-      fontFamily: "Comic Sans MS",
-      font: "30px Impact",
-    });
-    saveAndQuit.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
-      localStorage.setItem("scene", this.scene.key);
-      localStorage.setItem(
-        "player",
-        JSON.stringify({ x: player.sprite.x, y: player.sprite.y })
-      );
-      localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
-
-      //SAVE PLAYER INVENTORY
-      //WILL ITEMS COLLECTED REMAIN COLLECTED??
-      // console.log(player)
-      this.scene.start("MainMenu");
-    });
 
     placeMenus(this, player);
   }
