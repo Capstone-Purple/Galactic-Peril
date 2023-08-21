@@ -85,15 +85,16 @@ class escapeRoomScene extends Phaser.Scene {
       null,
       this
     );
-
-    let loadedPlayer = localStorage.getItem("player");
-    if (loadedPlayer) {
-      let location = JSON.parse(loadedPlayer);
-      player.sprite.setPosition(location.x, location.y);
-      let loadHealth = localStorage.getItem("healthBar");
-      let hBar = JSON.parse(loadHealth);
-      player.healthBar.value = hBar;
-    }
+      if(!prevRoom) {
+        let loadedPlayer = localStorage.getItem("player");
+        if (loadedPlayer) {
+          let location = JSON.parse(loadedPlayer);
+          player.sprite.setPosition(location.x, location.y);
+          let loadHealth = localStorage.getItem("PlayerHealth");
+          let hBar = JSON.parse(loadHealth);
+          player.healthBar.value = hBar;
+        }
+      }
 
     player.healthBar.bar.setDepth(1);
     player.sprite.setDepth(1);
@@ -104,12 +105,17 @@ class escapeRoomScene extends Phaser.Scene {
     enemy.sprite.setActive(true)
     enemy.sprite.setImmovable(true);
     this.physics.add.collider(enemy.sprite, [wallsLayer]);
-    let loadedEnemy = localStorage.getItem("enemy");
-    if (loadedEnemy) {
-      let location = JSON.parse(loadedEnemy);
-      enemy.sprite.setPosition(location.x, location.y);
-    }
 
+    if (!prevRoom) {
+      let loadedEnemy = localStorage.getItem("enemy");
+      if (loadedEnemy) {
+        let location = JSON.parse(loadedEnemy);
+        enemy.sprite.setPosition(location.x, location.y);
+        let loadHealth = localStorage.getItem("EnemyHealth");
+        let hBar = JSON.parse(loadHealth);
+        enemy.healthBar.value = hBar;
+      }
+    }
     let saveAndQuit = placeMenus(this, player, enemy);
 
     this.physics.add.collider(
