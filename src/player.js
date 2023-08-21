@@ -4,14 +4,14 @@ const Inventory = require("./inventory.js").default;
 class TextBox {
   constructor(scene, x, y) {
     this.scene = scene;
-    this.x = x;
-    this.y = y;
-    this.textBox = scene.add.text(x, y, "", {
+    // this.x = x;
+    // this.y = y;
+    this.textBox = scene.add.text(250, 675, "", {
       fontFamily: "Arial",
       fontSize: 20,
       color: "#ffffff",
     });
-    this.textBox.setOrigin(0.5, 1);
+    // this.textBox.setOrigin(0.5, 1);
     this.textBox.setDepth(1);
     this.textBox.setVisible(false);
   }
