@@ -283,7 +283,7 @@ class Player {
     this.laser.setScale(0.15);
     this.laser.setTint(0x800000);
     this.scene.sound.play("laser-sound", {
-      volume: 0.1,
+      volume: 0.07,
       loop: false,
     });
 
