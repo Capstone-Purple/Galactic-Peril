@@ -113,9 +113,6 @@ class escapeRoomScene extends Phaser.Scene {
       if (loadedEnemy) {
         let location = JSON.parse(loadedEnemy);
         enemy.sprite.setPosition(location.x, location.y);
-        let loadHealth = localStorage.getItem("EnemyHealth");
-        let hBar = JSON.parse(loadHealth);
-        enemy.healthBar.value = hBar;
       }
     }
     let saveAndQuit = placeMenus(this, player, enemy);

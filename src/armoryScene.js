@@ -59,6 +59,7 @@ class armoryScene extends Phaser.Scene {
       player.sprite,
       door,
       function () {
+        this.registry.set("health", player.healthBar.value);
         this.scene.start("Cafeteria");
       },
       null,
@@ -104,13 +105,15 @@ class armoryScene extends Phaser.Scene {
       gunsLayer,
     ]);
     // player.sprite.setImmovable(true)
-    let loadedPlayer = localStorage.getItem("player");
-    if (loadedPlayer) {
-      let location = JSON.parse(loadedPlayer);
-      player.sprite.setPosition(location.x, location.y);
-      let loadHealth = localStorage.getItem("healthBar");
-      let hBar = JSON.parse(loadHealth);
-      player.healthBar.value = hBar;
+    if(!prevRoom) {
+      let loadedPlayer = localStorage.getItem("player");
+      if (loadedPlayer) {
+        let location = JSON.parse(loadedPlayer);
+        player.sprite.setPosition(location.x, location.y);
+        let loadHealth = localStorage.getItem("healthBar");
+        let hBar = JSON.parse(loadHealth);
+        player.healthBar.value = hBar;
+      }
     }
 
     player.healthBar.bar.setDepth(1);
