@@ -51,7 +51,7 @@ class beginningScene extends Phaser.Scene {
 
     wallsLayer.setCollisionByProperty({ collides: true });
     medicalLayer.setCollisionByProperty({ collides: true });
-    doorLayer.setCollisionByProperty({ collides: true });
+    // doorLayer.setCollisionByProperty({ collides: true });
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
@@ -72,7 +72,7 @@ class beginningScene extends Phaser.Scene {
     this.registry.set("prevRoom", "beginningScene");
 
     platform = this.physics.add.staticGroup();
-    let door = platform.create(1015, 330, "door").setAlpha(0);
+    let door = platform.create(985, 330, "door").setAlpha(0);
     this.physics.add.collider(
       player.sprite,
       door,

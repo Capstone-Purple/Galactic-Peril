@@ -15,7 +15,7 @@ class escapeRoomScene extends Phaser.Scene {
 
   preload() {
     loadAssets(this);
-    this.load.tilemapTiledJSON("escapeRoom", "tilesets/Escape-Room.json");
+    this.load.tilemapTiledJSON("escapeRoom", "tilesets/Escape-Room2.json");
   }
 
   create() {
@@ -28,19 +28,24 @@ class escapeRoomScene extends Phaser.Scene {
     const wallTileset = map.addTilesetImage("wall1", "wall-tiles");
     const wall2Tileset = map.addTilesetImage("wall", "wall2-tiles");
     const doorTileset = map.addTilesetImage("door", "door-tiles");
+    const wall3Tileset = map.addTilesetImage("wall3", "wall3-tiles");
+    const furnitureTileset = map.addTilesetImage("wall1", "furni-tiles")
 
     map.createLayer("Background", backgroundTileset, 0, 0);
     map.createLayer("Floor", floorTileset, 0, 0);
     const wallsLayer = map.createLayer(
       "Walls",
-      [wallTileset, wall2Tileset],
+      [wallTileset, wall2Tileset, wall3Tileset],
       0,
       0
     );
     const doorLayer = map.createLayer("Door", doorTileset, 0, 0);
+    const furnitureLayer = map.createLayer("Furniture", furnitureTileset, 0, 0);
+
 
     wallsLayer.setCollisionByProperty({ collides: true });
     doorLayer.setCollisionByProperty({ collides: true });
+    furnitureLayer.setCollisionByProperty({ collides: true });
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
@@ -57,9 +62,10 @@ class escapeRoomScene extends Phaser.Scene {
     player.inventory.display();
 
     this.physics.add.collider(player.sprite, [wallsLayer]);
+    this.physics.add.collider(player.sprite, furnitureLayer);
 
     platform = this.physics.add.staticGroup();
-    let door1 = platform.create(75, 325, "door").setAlpha(0);
+    let door1 = platform.create(95, 325, "door").setAlpha(0);
     this.physics.add.collider(
       player.sprite,
       door1,
@@ -69,7 +75,7 @@ class escapeRoomScene extends Phaser.Scene {
       null,
       this
     );
-    let door2 = platform.create(1050, 325, "door").setAlpha(0);
+    let door2 = platform.create(1025, 325, "door").setAlpha(0);
     this.physics.add.collider(
       player.sprite,
       door2,
@@ -94,7 +100,8 @@ class escapeRoomScene extends Phaser.Scene {
     player.laser.setDepth(1);
     platform = this.physics.add.staticGroup();
 
-    enemy = new Enemy(this, 800, 300);
+    enemy = new Enemy(this, 755, 160)
+    enemy.sprite.setActive(true)
     enemy.sprite.setImmovable(true);
     this.physics.add.collider(enemy.sprite, [wallsLayer]);
     let loadedEnemy = localStorage.getItem("enemy");

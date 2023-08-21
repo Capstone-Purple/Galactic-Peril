@@ -58,7 +58,7 @@ class endingScene extends Phaser.Scene {
     this.registry.set("prevRoom", "endingScene");
 
     platform = this.physics.add.staticGroup();
-    let door = platform.create(560, 450, "door").setAlpha(100);
+    let door = platform.create(560, 450, "door").setAlpha(0);
     this.physics.add.collider(
       player.sprite,
       doorLayer,

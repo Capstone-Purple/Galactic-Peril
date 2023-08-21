@@ -3,7 +3,7 @@
  */
 
 function placeMenus(scene, player, enemy = null) {
-  const mainMenu = scene.add.text(600, 600, "Main Menu", {
+  const mainMenu = scene.add.text(750, 610, "Main Menu", {
     fontFamily: "Comic Sans MS",
     font: "30px Impact",
   });
@@ -11,7 +11,7 @@ function placeMenus(scene, player, enemy = null) {
     scene.scene.start("MainMenu");
   });
 
-  const saveAndQuit = scene.add.text(300, 600, "Save & Quit", {
+  const saveAndQuit = scene.add.text(100, 610, "Save & Quit", {
     fontFamily: "Comic Sans MS",
     font: "30px Impact",
   });
@@ -58,7 +58,9 @@ function loadAssets(scene) {
   scene.load.image("background-tiles", "tilesets/Starfield_1.png");
   scene.load.image("floor-tiles", "tilesets/A5_SciFi.png");
   scene.load.image("wall-tiles", "tilesets/Ship2_Bottom.png");
+  scene.load.image("furni-tiles", "tilesets/Ship2_Bottom.png");
   scene.load.image("wall2-tiles", "tilesets/A4_SciFi.png");
+  scene.load.image("wall3-tiles", "tilesets/Ship2_Top.png");
   scene.load.image("door1-tiles", "/tilesets/!$Objects_1.png");
   scene.load.image("door2-tiles", "/tilesets/!$Objects_1.png");
   scene.load.image("door-tiles", "tilesets/!$Objects_1.png");

@@ -83,7 +83,7 @@ class MainMenu extends Phaser.Scene {
         this.registry.set("inventory", false)
         this.scene.start("beginningScene");
       });
-      const continueBtn = this.add.text(400, 400, "Continue Game", {
+      const continueBtn = this.add.text(450, 400, "Continue Game", {
         fontFamily: "Comic Sans MS",
         font: "30px Impact",
       });
