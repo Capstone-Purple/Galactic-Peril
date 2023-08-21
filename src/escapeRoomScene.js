@@ -70,6 +70,7 @@ class escapeRoomScene extends Phaser.Scene {
       player.sprite,
       door1,
       function () {
+        this.registry.set("health", player.healthBar.value);
         this.scene.start("beginningScene");
       },
       null,
@@ -80,6 +81,7 @@ class escapeRoomScene extends Phaser.Scene {
       player.sprite,
       door2,
       function () {
+        this.registry.set("health", player.healthBar.value);
         this.scene.start("Cafeteria");
       },
       null,
