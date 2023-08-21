@@ -5,8 +5,8 @@
 class Inventory {
     constructor(scene) {
         this.scene = scene;
-        this.x = 320;
-        this.y = 530;
+        this.x = 370;
+        this.y = 600;
         this.rows = 1;
         this.cols = 3;
         this.slotSize = 70;

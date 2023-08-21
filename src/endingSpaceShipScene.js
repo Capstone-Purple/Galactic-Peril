@@ -51,6 +51,14 @@ class endingSpaceShip extends Phaser.Scene {
     });
 
     this.events.on("update", this.updateShipLayer, this);
+
+    const mainMenu = this.add.text(500, 640, "Main Menu", {
+      fontFamily: "Comic Sans MS",
+      font: "30px Impact",
+    });
+    mainMenu.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
+      this.scene.start("MainMenu");
+    });
   }
 
   updateShipLayer() {

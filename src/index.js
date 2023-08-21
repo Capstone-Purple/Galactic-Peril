@@ -36,7 +36,11 @@ import escapeRoomScene from "./escapeRoomScene";
 let config = {
   type: Phaser.AUTO,
   width: 1200,
-  height: 1000,
+  height: 900,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
   physics: {
     default: "arcade",
   },
