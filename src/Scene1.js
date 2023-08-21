@@ -65,8 +65,7 @@ class Scene1 extends Phaser.Scene {
     } else {
       player = new Player(this, 200, 325);
       //new scene text and duration
-      let enterSceneText =
-        "Hold on, what... who are you? This isn't exactly how I imagined my day going.";
+      let enterSceneText = "Hold on, what... who are you? This isn't exactly how I imagined my day going.";
       const displayTime = 7000;
       player.enterNewScene(this, enterSceneText, displayTime);
     }
