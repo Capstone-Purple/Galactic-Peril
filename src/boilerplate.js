@@ -27,7 +27,8 @@ function placeMenus(scene, player, enemy = null) {
         JSON.stringify({ x: enemy.sprite.x, y: enemy.sprite.y })
       );
     }
-    localStorage.setItem("healthBar", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
+    localStorage.setItem("PlayerHealth", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
+    localStorage.setItem("EnemyHealth", JSON.stringify(enemy.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
 
     //SAVE PLAYER INVENTORY
     //WILL ITEMS COLLECTED REMAIN COLLECTED??
