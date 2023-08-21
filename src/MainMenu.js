@@ -62,13 +62,14 @@ class MainMenu extends Phaser.Scene {
         fontFamily: "Comic Sans MS",
         font: "30px Impact",
       });
-      instructions = this.add.text(155, 750, "Instructions: Arrow Keys to move, Shift to interact with objects, Spacebar to shoot", {
+      instructions = this.add.text(155, 750, "Instructions: Arrow Keys to move, Shift to interact with objects, Spacebar to shoot\nInventory usage: 1, 2, 3", {
         fontFamily: "Comic Sans MS",
         font: "25px Impact",
       });
       startBtn.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
         localStorage.clear();
         this.registry.set("health", false)
+        this.registry.set("inventory", false)
         this.scene.start("beginningScene");
       });
     } else {
@@ -79,6 +80,7 @@ class MainMenu extends Phaser.Scene {
       startBtn.setInteractive({ cursor: "pointer" }).on("pointerdown", () => {
         localStorage.clear();
         this.registry.set("health", false)
+        this.registry.set("inventory", false)
         this.scene.start("beginningScene");
       });
       const continueBtn = this.add.text(400, 400, "Continue Game", {

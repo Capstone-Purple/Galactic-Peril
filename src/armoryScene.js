@@ -44,14 +44,13 @@ class armoryScene extends Phaser.Scene {
 
     const prevRoom = this.registry.get("prevRoom");
     console.log(prevRoom);
-    if (prevRoom === "Cafeteria") {
-      player = new Player(this, 200, 430);
-      //new scene text and duration
-      let enterSceneText =
-        "Oh the armory. Which weapon should I pick? The pistol in the third case looks cool.";
-      const displayTime = 7000;
-      player.enterNewScene(this, enterSceneText, displayTime);
-    }
+    player = new Player(this, 200, 430);
+    //new scene text and duration
+    let enterSceneText =
+      "Oh the armory. Which weapon should I pick? The pistol in the third case looks cool.";
+    const displayTime = 7000;
+    player.enterNewScene(this, enterSceneText, displayTime);
+    
     this.registry.set("prevRoom", "Armory");
 
     platform = this.physics.add.staticGroup();
