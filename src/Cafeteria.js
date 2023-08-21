@@ -74,6 +74,7 @@ class Cafeteria extends Phaser.Scene {
       player.sprite,
       door1Layer,
       function () {
+        this.registry.set("health", player.healthBar.value);
         this.scene.start("escapeRoomScene");
       },
       null,
@@ -84,6 +85,7 @@ class Cafeteria extends Phaser.Scene {
       player.sprite,
       door2Layer,
       function () {
+        this.registry.set("health", player.healthBar.value);
         this.scene.start("Scene1");
       },
       null,
@@ -94,6 +96,7 @@ class Cafeteria extends Phaser.Scene {
       player.sprite,
       door3Layer,
       function () {
+        this.registry.set("health", player.healthBar.value);
         this.scene.start("armoryScene");
       },
       null,
