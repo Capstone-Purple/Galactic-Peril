@@ -40,7 +40,7 @@ function placeMenus(scene, player, enemy = null) {
     scene.music = scene.sound.add("background-music");
     const musicConfig = {
       mute: false,
-      volume: 0.3,
+      volume: 0.1,
       rate: 1,
       detune: 0,
       seek: 0,
