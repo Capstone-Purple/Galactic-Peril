@@ -64,6 +64,18 @@ class beginningScene extends Phaser.Scene {
         const displayTime = 7000;
         player.enterNewScene(this, enterSceneText, displayTime);
     }
+
+    if(!prevRoom) {
+      let loadedPlayer = localStorage.getItem("player");
+      if (loadedPlayer) {
+        let location = JSON.parse(loadedPlayer);
+        player.sprite.setPosition(location.x, location.y);
+        let loadHealth = localStorage.getItem("PlayerHealth");
+        let hBar = JSON.parse(loadHealth);
+        player.healthBar.value = hBar;
+      }
+    }
+
     this.physics.add.collider(player.sprite, [
       floorLayer,
       wallsLayer,

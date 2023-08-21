@@ -28,11 +28,6 @@ function placeMenus(scene, player, enemy = null) {
       );
     }
     localStorage.setItem("PlayerHealth", JSON.stringify(player.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
-    localStorage.setItem("EnemyHealth", JSON.stringify(enemy.healthBar.value)); //{x: player.healthBar.x, y: player.healthBar.y}))
-
-    //SAVE PLAYER INVENTORY
-    //WILL ITEMS COLLECTED REMAIN COLLECTED??
-    // console.log(player)
     scene.scene.start("MainMenu");
   });
 
