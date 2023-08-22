@@ -134,9 +134,9 @@ class Scene1 extends Phaser.Scene {
       blackscreen,
       function () {
         collision = blackscreen;
-        setTimeout(() => {
-          collision = null;
-        }, 100);
+        // setTimeout(() => {
+        //   collision = null;
+        // }, 100);
       },
       null,
       this
