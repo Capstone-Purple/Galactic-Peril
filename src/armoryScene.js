@@ -75,9 +75,9 @@ class armoryScene extends Phaser.Scene {
         pistol,
         function () {
           collision = pistol;
-          setTimeout(() => {
-            collision = null;
-          }, 100);
+          // setTimeout(() => {
+          //   collision = null;
+          // }, 100);
         },
         null,
         this
@@ -88,7 +88,7 @@ class armoryScene extends Phaser.Scene {
           if (collision) {
             if (collision === pistol) {
               player.acquireItem(collision.texture.key);
-              pistol.setActive(false).setVisible(false);
+              pistol.destroy();
             }
           }
         },

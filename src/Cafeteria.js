@@ -128,9 +128,9 @@ class Cafeteria extends Phaser.Scene {
       vending1,
       function () {
         collision = vending1;
-        setTimeout(() => {
-          collision = null;
-        }, 50);
+        // setTimeout(() => {
+        //   collision = null;
+        // }, 50);
       },
       null,
       this
@@ -141,9 +141,9 @@ class Cafeteria extends Phaser.Scene {
       plate1,
       function () {
         collision = plate1;
-        setTimeout(() => {
-          collision = null;
-        }, 50);
+        // setTimeout(() => {
+        //   collision = null;
+        // }, 50);
       },
       null,
       this
