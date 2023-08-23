@@ -154,13 +154,15 @@ class Cafeteria extends Phaser.Scene {
       function () {
         if (collision) {
           if (collision === vending1) {
-            player.acquireItem(collision.texture.key);
+            player.acquireItem(vending1.texture.key);
             this.registry.set("drinkCollected", true);
-            collision.destroy();
+            vending1.destroy();
+            collision = null;
           } else if (collision === plate1) {
-            player.acquireItem(collision.texture.key);
+            player.acquireItem(plate1.texture.key);
             this.registry.set("foodCollected", true);
-            collision.destroy();
+            plate1.destroy();
+            collision = null;
           } else {
             collision = null;
           }
